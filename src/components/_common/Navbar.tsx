@@ -1,3 +1,5 @@
+"use client";
+
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
@@ -9,6 +11,8 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link"
 import { Playfair_Display } from "next/font/google";
 import React from "react";
+import { usePathname } from "next/navigation";
+import { Divider } from "@mui/material";
 
 const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -30,12 +34,14 @@ const navItems: Array<INavItems> = [
         text: 'Collections'
     },
     {
-        href: 'products',
+        href: '/products',
         text: 'Products'
     }
 ]
 
 const Navbar = () => {
+    const pathname = usePathname()
+
     return (
         <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
             <Toolbar sx={{ justifyContent: 'space-around' }}>
@@ -59,7 +65,10 @@ const Navbar = () => {
                 {/* Center Side */}
                 <Stack direction={'row'} spacing={3}>
                     {navItems.map((item) => (
-                        <Link href={item.href} key={item.text}>{item.text}</Link>
+                        <Stack key={item.text}>
+                            <Link href={item.href} key={item.text}>{item.text}</Link>
+                            {pathname === item.href ? <Divider sx={{ bgcolor: 'gold' }} /> : null}
+                        </Stack>
                     ))}
                 </Stack>
 
