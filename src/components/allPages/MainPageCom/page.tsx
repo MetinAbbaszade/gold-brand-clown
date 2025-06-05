@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Divider, Stack } from "@mui/material";
 import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
 import { Playfair_Display } from "next/font/google";
@@ -23,6 +23,7 @@ const MainPageCom = async () => {
                 alignItems={'center'}
                 justifyContent={'center'}
                 m={'0 auto'}
+                mb={'50px'}
                 p={'50px 0'}
             >
                 <MainCollectionSection playfair={playfair} />

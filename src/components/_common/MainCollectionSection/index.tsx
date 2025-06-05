@@ -2,12 +2,50 @@
 
 import { Box, Button, Divider, Stack, Typography } from '@mui/material'
 import { NextFont } from 'next/dist/compiled/@next/font'
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
 export interface IComp {
     playfair: NextFont
 }
+
+export interface IMock {
+    name: string
+    description: string
+    prodName: string
+    price: number
+    imageUrl: string
+}
+
+const MOCK_DATA: Array<IMock> = [
+    {
+        name: 'Celestial',
+        description: 'First Description',
+        prodName: 'Luna Drop Earrings',
+        price: 500,
+        imageUrl: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80'
+    },
+    {
+        name: 'Romance',
+        description: 'Second Description',
+        prodName: 'Luna Drop Rings',
+        price: 850,
+        imageUrl: 'https://images.unsplash.com/photo-1476965805533-564543966f62?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },
+    {
+        name: 'Floral',
+        description: 'Third Description',
+        prodName: 'Luna Drop Earrings',
+        price: 700,
+        imageUrl: 'https://images.unsplash.com/photo-1607703829739-c05b7beddf60?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    },
+    {
+        name: 'Royal',
+        description: 'Fourth Description',
+        prodName: 'Luna Drop Rings',
+        price: 999,
+        imageUrl: 'https://plus.unsplash.com/premium_photo-1674748385760-d846825598ab?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+    }
+]
 
 const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
     const [index, setIndex] = useState(0)
@@ -16,12 +54,12 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
         const timer = setInterval(() => {
             setIndex((i) => {
                 let j = i += 1
-                if (j == 5) {
+                if (j == MOCK_DATA.length) {
                     return 0
                 }
                 return j
             })
-        }, 1000);
+        }, 3000);
 
         return () => clearInterval(timer)
     }, [])
@@ -58,52 +96,69 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
                 minHeight={'100%'}
                 m={'30px 0'}
                 borderRadius={'5px'}
-                p={'50px 30px'}
+                p={'0 30px'}
                 color={'white'}
                 spacing={10}
                 justifyContent={'flex-start'}
                 sx={{
-                    backgroundImage: 'url("/mainImage.avif")',
+                    backgroundImage: `url("${MOCK_DATA[index].imageUrl}")`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
                 }}
+                position={'relative'}
             >
-                <Stack component={'header'} spacing={2}>
+                <Box
+                    sx={{
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+                        zIndex: 1,
+                    }}
+                />
+                <Stack component={'header'} spacing={2} zIndex={2}>
                     <Typography
-                        variant='h4'
+                        variant='h3'
                         fontFamily={playfair.style.fontFamily}
                     >
-                        Celestial Collection
+                        {MOCK_DATA[index].name} Collection
                     </Typography>
                     <Typography
                         variant='h6'
                     >
-                        Inspired by the cosmos, designed for eternity
+                        {MOCK_DATA[index].description}
                     </Typography>
                 </Stack>
                 <Stack
                     direction={'row'}
                     spacing={0}
+                    zIndex={2}
+                    mb={10}
                 >
                     <Divider sx={{ bgcolor: 'gold', width: '2px' }} orientation="vertical" flexItem />
                     <Stack
                         component={'section'}
-                        bgcolor={'rgba(0,0,0,0.8)'}
+                        bgcolor={'rgba(0,0,0,0.5)'}
                         minWidth={'300px'}
                         p={'50px 20px'}
                         spacing={2}
+
                     >
                         <Typography
                             variant='h5'
                             fontFamily={playfair.style.fontFamily}
                         >
-                            Luna Drop Earrings
+                            {MOCK_DATA[index].prodName}
                         </Typography>
                         <Typography
                             variant='h6'
+                            color='gold'
+                            fontWeight={100}
                         >
-                            $1840
+                            ${MOCK_DATA[index].price}
                         </Typography>
                         <Button
                             variant='outlined'
@@ -114,6 +169,7 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
                                 padding: '10px 20px',
                                 opacity: 0.8,
                             }}
+                            href='/collections'
                         >
                             Shop Now
                         </Button>
