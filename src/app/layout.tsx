@@ -14,11 +14,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={montserrat.className} style={{ margin: 0 }}>
+      <body style={{ margin: 0, fontFamily: montserrat.style.fontFamily }}>
         <Stack>
           <Navbar />
         </Stack>
-        <Stack component={'main'} top={'80px'} position={'absolute'}>
+        <Stack component={'main'} position={'absolute'}>
           {children}
         </Stack>
       </body>
