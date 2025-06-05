@@ -1,6 +1,6 @@
 import { Stack } from "@mui/material";
 import "./globals.css";
-import Navbar from "@/components/_common/Navbar";
+import Navbar from "@/components/_common/Navbar/Navbar";
 import { Montserrat } from 'next/font/google'
 
 const montserrat = Montserrat({
