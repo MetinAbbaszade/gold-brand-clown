@@ -14,7 +14,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 import { Divider } from "@mui/material";
 
-const playfair = Playfair_Display({
+export const playfair = Playfair_Display({
     subsets: ['latin'],
     weight: '400'
 })
@@ -66,7 +66,11 @@ const Navbar = () => {
                 <Stack direction={'row'} spacing={3}>
                     {navItems.map((item) => (
                         <Stack key={item.text}>
-                            <Link href={item.href} key={item.text}>{item.text}</Link>
+                            <Link href={item.href} key={item.text}>
+                                <Stack textTransform={'uppercase'} letterSpacing={'1px'}>
+                                    {item.text}
+                                </Stack>
+                            </Link>
                             {pathname === item.href ? <Divider sx={{ bgcolor: 'gold' }} /> : null}
                         </Stack>
                     ))}
