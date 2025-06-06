@@ -1,12 +1,16 @@
 "use client";
 
-import { IComp } from '@/components/_common/MainCollectionSection';
 import { Box, Button, Fade, Stack, Typography } from '@mui/material'
+import { NextFont } from 'next/dist/compiled/@next/font';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 
+interface IProp {
+    playfair: NextFont
+}
 
-const HeroSection: React.FC<IComp> = ({ playfair }) => {
+const HeroSection: React.FC<IProp> = ({ playfair }) => {
+
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {

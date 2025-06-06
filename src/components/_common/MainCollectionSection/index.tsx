@@ -4,8 +4,18 @@ import { Box, Button, Divider, Stack, Typography } from '@mui/material'
 import { NextFont } from 'next/dist/compiled/@next/font'
 import React, { useEffect, useState } from 'react'
 
+interface ICollection {
+    name: string;
+    description: string;
+    prodName: string;
+    price: number;
+    imageUrl: string;
+    id: string;
+}
+
 export interface IComp {
     playfair: NextFont
+    data: ICollection[]
 }
 
 export interface IMock {
@@ -16,53 +26,16 @@ export interface IMock {
     imageUrl: string
 }
 
-const MOCK_DATA: Array<IMock> = [
-    {
-        name: 'Celestial',
-        description: 'First Description',
-        prodName: 'Luna Drop Earrings',
-        price: 500,
-        imageUrl: 'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1035&q=80'
-    },
-    {
-        name: 'Romance',
-        description: 'Second Description',
-        prodName: 'Luna Drop Rings',
-        price: 850,
-        imageUrl: 'https://images.unsplash.com/photo-1476965805533-564543966f62?q=80&w=3425&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-        name: 'Floral',
-        description: 'Third Description',
-        prodName: 'Luna Drop Earrings',
-        price: 700,
-        imageUrl: 'https://images.unsplash.com/photo-1607703829739-c05b7beddf60?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    },
-    {
-        name: 'Royal',
-        description: 'Fourth Description',
-        prodName: 'Luna Drop Rings',
-        price: 999,
-        imageUrl: 'https://plus.unsplash.com/premium_photo-1674748385760-d846825598ab?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-    }
-]
-
-const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
+const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
     const [index, setIndex] = useState(0)
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setIndex((i) => {
-                let j = i += 1
-                if (j == MOCK_DATA.length) {
-                    return 0
-                }
-                return j
-            })
+            setIndex((i) => (i + 1) % data.length)
         }, 3000);
 
         return () => clearInterval(timer)
-    }, [])
+    }, [data.length])
 
     return (
         <Box height={'40vh'} width={'100%'}>
@@ -101,7 +74,7 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
                 spacing={10}
                 justifyContent={'flex-start'}
                 sx={{
-                    backgroundImage: `url("${MOCK_DATA[index].imageUrl}")`,
+                    backgroundImage: `url("${data[index].imageUrl}")`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
@@ -124,12 +97,12 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
                         variant='h3'
                         fontFamily={playfair.style.fontFamily}
                     >
-                        {MOCK_DATA[index].name} Collection
+                        {data[index].name} Collection
                     </Typography>
                     <Typography
                         variant='h6'
                     >
-                        {MOCK_DATA[index].description}
+                        {data[index].description}
                     </Typography>
                 </Stack>
                 <Stack
@@ -151,14 +124,14 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair }) => {
                             variant='h5'
                             fontFamily={playfair.style.fontFamily}
                         >
-                            {MOCK_DATA[index].prodName}
+                            {data[index].prodName}
                         </Typography>
                         <Typography
                             variant='h6'
                             color='gold'
                             fontWeight={100}
                         >
-                            ${MOCK_DATA[index].price}
+                            ${data[index].price}
                         </Typography>
                         <Button
                             variant='outlined'

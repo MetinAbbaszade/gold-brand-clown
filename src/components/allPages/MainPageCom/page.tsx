@@ -1,7 +1,8 @@
-import { Divider, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
 import { Playfair_Display } from "next/font/google";
+import { getAllCollection } from "@/api/collection";
 
 
 
@@ -10,7 +11,10 @@ export const playfair = Playfair_Display({
     weight: '400'
 });
 
+
+
 const MainPageCom = async () => {
+    const data = await getAllCollection()
     return (
         <Stack component={'main'}>
             <Stack
@@ -26,7 +30,7 @@ const MainPageCom = async () => {
                 mb={'50px'}
                 p={'50px 0'}
             >
-                <MainCollectionSection playfair={playfair} />
+                <MainCollectionSection playfair={playfair} data={data} />
             </Stack>
         </Stack>
     );
