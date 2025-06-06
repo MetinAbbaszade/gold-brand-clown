@@ -1,8 +1,9 @@
 "use client";
 
-import { Box, Button, Divider, Stack, Typography } from '@mui/material'
-import { NextFont } from 'next/dist/compiled/@next/font'
-import React, { useEffect, useState } from 'react'
+import { Box, Button, Divider, Stack, Typography } from '@mui/material';
+import { NextFont } from 'next/dist/compiled/@next/font';
+import React, { useEffect, useState } from 'react';
+import { MotionStack } from '../HeroSection';
 
 interface ICollection {
     name: string;
@@ -14,37 +15,55 @@ interface ICollection {
 }
 
 export interface IComp {
-    playfair: NextFont
-    data: ICollection[]
+    playfair: NextFont;
+    data: ICollection[];
 }
 
-export interface IMock {
-    name: string
-    description: string
-    prodName: string
-    price: number
-    imageUrl: string
-}
+const slideInVariants = {
+    offscreen: {
+        opacity: 0,
+        x: -100
+    },
+    onscreen: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            duration: 0.6,
+            ease: "easeOut",
+        },
+    },
+};
 
 const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
-    const [index, setIndex] = useState(0)
+    const [index, setIndex] = useState(0);
 
     useEffect(() => {
-        const timer = setInterval(() => {
-            setIndex((i) => (i + 1) % data.length)
-        }, 3000);
 
-        return () => clearInterval(timer)
-    }, [data.length])
+        if (data && data.length > 0) {
+            const timer = setInterval(() => {
+                setIndex((i) => (i + 1) % data.length);
+            }, 3000);
+
+            return () => clearInterval(timer);
+        }
+    }, [data]);
+
+
+    if (!data || data.length === 0) {
+        return null;
+    }
 
     return (
-        <Box height={'40vh'} width={'100%'}>
+        <Stack
+            spacing={4}
+            alignItems="center"
+            width="100%"
+        >
             <Stack textAlign={'center'}>
                 <Typography
                     variant='h4'
                     sx={{
                         fontFamily: playfair.style.fontFamily,
-                        marginBottom: '15px',
                         fontSize: '36px'
                     }}
                 >
@@ -54,7 +73,7 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                     sx={{
                         bgcolor: 'gold',
                         width: '20%',
-                        margin: '0 auto 10px',
+                        margin: '10px auto',
                         height: '1px',
                     }}
                 />
@@ -62,12 +81,16 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                     color={'#666'}
                     variant='overline'
                 >
-                    Discover our most coveted pieces</Typography>
+                    Discover our most coveted pieces
+                </Typography>
             </Stack>
-            <Stack
+            <MotionStack
+                variants={slideInVariants}
+                initial="offscreen"
+                whileInView="onscreen"
+                viewport={{ once: true, amount: 0.5 }}
                 width={'100%'}
-                minHeight={'100%'}
-                m={'30px 0'}
+                height={'60vh'}
                 borderRadius={'5px'}
                 p={'0 30px'}
                 color={'white'}
@@ -90,6 +113,7 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                         bottom: 0,
                         backgroundColor: 'rgba(0, 0, 0, 0.4)',
                         zIndex: 1,
+                        borderRadius: '5px',
                     }}
                 />
                 <Stack component={'header'} spacing={2} zIndex={2}>
@@ -148,9 +172,9 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                         </Button>
                     </Stack>
                 </Stack>
-            </Stack>
-        </Box>
-    )
+            </MotionStack>
+        </Stack>
+    );
 }
 
-export default MainCollectionSection
+export default MainCollectionSection;

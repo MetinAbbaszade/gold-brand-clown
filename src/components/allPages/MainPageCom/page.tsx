@@ -17,9 +17,7 @@ const MainPageCom = async () => {
     const data = await getAllCollection()
     return (
         <Stack component={'main'}>
-            <Stack
-                m={'50px 0'}
-            >
+            <Stack m={'50px 0'}>
                 <HeroSection playfair={playfair} />
             </Stack>
             <Stack
@@ -27,7 +25,6 @@ const MainPageCom = async () => {
                 alignItems={'center'}
                 justifyContent={'center'}
                 m={'0 auto'}
-                mb={'50px'}
                 p={'50px 0'}
             >
                 <MainCollectionSection playfair={playfair} data={data} />

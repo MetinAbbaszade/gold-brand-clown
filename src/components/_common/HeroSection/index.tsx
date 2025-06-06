@@ -1,27 +1,62 @@
 "use client";
 
-import { Box, Button, Fade, Stack, Typography } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
+import { motion } from 'framer-motion';
 import { NextFont } from 'next/dist/compiled/@next/font';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
+
 
 interface IProp {
     playfair: NextFont
 }
+const MotionButton = motion(Button)
+export const MotionStack = motion(Stack)
+
+
+export const heroContainerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 0.5,
+            ease: "easeInOut"
+        }
+    }
+};
+
+
+export const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+        opacity: 1,
+        transition: {
+            staggerChildren: 0.3,
+            ease: [0.33, 1, 0.68, 1],
+        },
+    },
+};
+
+
+const itemVariants = {
+    hidden: { opacity: 0, y: 75, x: 75 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        x: 0,
+        transition: {
+            duration: 1.2,
+            ease: [0.33, 1, 0.68, 1],
+        },
+    },
+};
 
 const HeroSection: React.FC<IProp> = ({ playfair }) => {
 
-    const [isMounted, setIsMounted] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setIsMounted(true);
-        }, 100);
-        return () => clearTimeout(timer);
-    }, []);
-
     return (
-        <Stack
+        <MotionStack
+            variants={heroContainerVariants}
+            initial="hidden"
+            animate="visible"
             height={'100vh'}
             minWidth={'100vw'}
             alignItems={'center'}
@@ -33,8 +68,6 @@ const HeroSection: React.FC<IProp> = ({ playfair }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center',
                 backgroundRepeat: 'no-repeat',
-                transform: isMounted ? 'translateY(0)' : 'translateY(40px)',
-                transition: `transform 1.2s cubic-bezier(0.33, 1, 0.68, 1)`,
                 color: 'white',
             }}
         >
@@ -50,69 +83,67 @@ const HeroSection: React.FC<IProp> = ({ playfair }) => {
                     zIndex: 1,
                 }}
             />
-
-            {/* Content Wrapper with Fade-in Transition */}
-            <Fade in={isMounted} timeout={1200}>
-                <Stack
-                    maxWidth={'800px'}
-                    alignItems={'center'}
-                    spacing={3}
+            <MotionStack
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                maxWidth={'800px'}
+                alignItems={'center'}
+                spacing={3}
+                sx={{
+                    position: 'relative',
+                    zIndex: 2,
+                    padding: { xs: '20px', md: '0px' }
+                }}
+            >
+                <Typography
+                    component={motion.p}
+                    variants={itemVariants}
+                    variant='h3'
+                    textAlign={'center'}
                     sx={{
-                        position: 'relative',
-                        zIndex: 2,
-                        padding: { xs: '20px', md: '0px' }
+                        fontFamily: (playfair && playfair.style) ? playfair.style.fontFamily : 'serif',
+                        lineHeight: '1.3',
+                        letterSpacing: '1px',
+                        fontWeight: 'normal',
+                        transition: `transform 1.2s cubic-bezier(0.33, 1, 0.68, 1)`,
                     }}
                 >
-                    <Typography
-                        variant='h3'
-                        textAlign={'center'}
-                        sx={{
-                            fontFamily: (playfair && playfair.style) ? playfair.style.fontFamily : 'serif',
-                            lineHeight: '1.3',
-                            letterSpacing: '1px',
-                            fontWeight: 'normal',
-                            transform: isMounted ? 'translateY(0)' : 'translateY(40px)',
-                            transition: `transform 1.2s cubic-bezier(0.33, 1, 0.68, 1)`,
-                        }}
-                    >
-                        Timeless Elegance, Crafted to Perfection
-                    </Typography>
-                    <Typography
-                        variant='h6'
-                        fontWeight={300}
-                        textAlign={'center'}
-                        sx={{
-                            opacity: 0.9,
-                            transform: isMounted ? 'translateY(0)' : 'translateY(40px)',
-                            transition: `transform 1.2s cubic-bezier(0.33, 1, 0.68, 1)`,
-                        }}
-                    >
-                        Exquisite jewelry that transcends generations
-                    </Typography>
-                    <Button
-                        component={Link}
-                        href="/collections"
-                        variant="outlined"
-                        color="inherit"
-                        sx={{
-                            borderColor: 'rgba(255, 255, 255, 0.7)',
-                            padding: '12px 30px',
-                            letterSpacing: '2px',
-                            fontWeight: 'bold',
-                            transition: 'background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 1.2s ease',
-                            '&:hover': {
-                                backgroundColor: 'rgba(224, 204, 22, 0.8)',
-                                borderColor: 'rgba(224, 204, 22, 0.8)',
-                                color: '#000'
-                            },
-                            transform: isMounted ? 'translateY(0)' : 'translateY(40px)',
-                        }}
-                    >
-                        Explore Collection
-                    </Button>
-                </Stack>
-            </Fade>
-        </Stack>
+                    Timeless Elegance, Crafted to Perfection
+                </Typography>
+                <Typography
+                    component={motion.h6}
+                    variants={itemVariants}
+                    variant='h6'
+                    fontWeight={300}
+                    textAlign={'center'}
+                    sx={{
+                        opacity: 0.9,
+                    }}
+                >
+                    Exquisite jewelry that transcends generations
+                </Typography>
+                <MotionButton
+                    variants={itemVariants}
+                    href="/collections"
+                    variant="outlined"
+                    color="inherit"
+                    sx={{
+                        borderColor: 'rgba(255, 255, 255, 0.7)',
+                        padding: '12px 30px',
+                        letterSpacing: '2px',
+                        fontWeight: 'bold',
+                        '&:hover': {
+                            backgroundColor: 'rgba(224, 204, 22, 0.8)',
+                            borderColor: 'rgba(224, 204, 22, 0.8)',
+                            color: '#000'
+                        },
+                    }}
+                >
+                    Explore Collection
+                </MotionButton>
+            </MotionStack>
+        </MotionStack>
     )
 }
 
