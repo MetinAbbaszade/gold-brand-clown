@@ -5,6 +5,6 @@ export const metadata: Metadata = {
   title: 'Home Page | Timeless Elegance'
 }
 
-export default async function Home() {
+export default function Home() {
   return <MainPageCom />
 }
