@@ -1,9 +1,11 @@
 import { Stack } from "@mui/material";
 import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
-import { Playfair_Display } from "next/font/google";
+import { Montserrat, Playfair_Display } from "next/font/google";
 import { getAllCollection } from "@/api/collection";
 import MainAboutSection from "@/components/_common/MainAboutSection";
+import MainTestimonials from "@/components/_common/MainTestimonials";
+import { getAllTestimonials } from "@/api/testimonials";
 
 
 
@@ -12,10 +14,16 @@ export const playfair = Playfair_Display({
     weight: '400'
 });
 
+export const montserrat = Montserrat({
+    subsets: ['latin'],
+    weight: '400'
+})
+
 
 
 const MainPageCom = async () => {
-    const data = await getAllCollection()
+    const collectionData = await getAllCollection()
+    const testimonialsData = await getAllTestimonials()
     return (
         <Stack component={'main'}>
             <Stack m={'50px 0'}>
@@ -28,12 +36,17 @@ const MainPageCom = async () => {
                 m={'0 auto'}
                 p={'50px 0'}
             >
-                <MainCollectionSection playfair={playfair} data={data} />
+                <MainCollectionSection playfair={playfair} collectionData={collectionData} />
             </Stack>
             <Stack
                 m={'40px 0'}
             >
-                <MainAboutSection playfair={playfair} />
+                <MainAboutSection playfair={playfair} montserrat={montserrat} />
+            </Stack>
+            <Stack
+                m={'50px 0'}
+            >
+                <MainTestimonials playfair={playfair} montserrat={montserrat} testimonialsData={testimonialsData}/>
             </Stack>
         </Stack>
     );
