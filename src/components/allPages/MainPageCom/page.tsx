@@ -6,6 +6,7 @@ import { getAllCollection } from "@/api/collection";
 import MainAboutSection from "@/components/_common/MainAboutSection";
 import MainTestimonials from "@/components/_common/MainTestimonials";
 import { getAllTestimonials } from "@/api/testimonials";
+import SubscribeSection from "@/components/_common/SubscribeSection";
 
 
 
@@ -25,7 +26,9 @@ const MainPageCom = async () => {
     const collectionData = await getAllCollection()
     const testimonialsData = await getAllTestimonials()
     return (
-        <Stack component={'main'}>
+        <Stack
+            component={'main'}
+        >
             <Stack m={'50px 0'}>
                 <HeroSection playfair={playfair} />
             </Stack>
@@ -46,7 +49,12 @@ const MainPageCom = async () => {
             <Stack
                 m={'50px 0'}
             >
-                <MainTestimonials playfair={playfair} montserrat={montserrat} testimonialsData={testimonialsData}/>
+                <MainTestimonials playfair={playfair} montserrat={montserrat} testimonialsData={testimonialsData} />
+            </Stack>
+            <Stack
+                m={'50px 0'}
+            >
+                <SubscribeSection playfair={playfair} montserrat={montserrat} />
             </Stack>
         </Stack>
     );

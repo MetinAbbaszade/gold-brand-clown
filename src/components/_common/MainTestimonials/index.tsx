@@ -88,7 +88,7 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, montserrat, testimonialsD
             </Stack>
             <Stack
                 direction={'row'}
-                spacing={1}
+                spacing={2}
                 justifyContent={'center'}
             >
                 {[...Array(testimonialsData.length).keys()].map((i) => (
@@ -96,9 +96,9 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, montserrat, testimonialsD
                         key={i}
                         width={10}
                         height={10}
-                        border={'1px solid #000'}
+                        border={'none'}
                         borderRadius={'50%'}
-                        bgcolor={i === index ? 'gold' : 'inherit'}
+                        bgcolor={i === index ? 'gold' : '#e0e0e0'}
                     />
                 ))}
             </Stack>
