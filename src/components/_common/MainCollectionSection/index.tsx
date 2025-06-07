@@ -16,7 +16,7 @@ interface ICollection {
 
 export interface IComp {
     playfair: NextFont;
-    data: ICollection[];
+    collectionData: ICollection[];
 }
 
 const slideInVariants = {
@@ -34,22 +34,22 @@ const slideInVariants = {
     },
 };
 
-const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
+const MainCollectionSection: React.FC<IComp> = ({ playfair, collectionData }) => {
     const [index, setIndex] = useState(0);
 
     useEffect(() => {
 
-        if (data && data.length > 0) {
+        if (collectionData && collectionData.length > 0) {
             const timer = setInterval(() => {
-                setIndex((i) => (i + 1) % data.length);
+                setIndex((i) => (i + 1) % collectionData.length);
             }, 3000);
 
             return () => clearInterval(timer);
         }
-    }, [data]);
+    }, [collectionData]);
 
 
-    if (!data || data.length === 0) {
+    if (!collectionData || collectionData.length === 0) {
         return null;
     }
 
@@ -97,7 +97,7 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                 spacing={10}
                 justifyContent={'flex-start'}
                 sx={{
-                    backgroundImage: `url("${data[index].imageUrl}")`,
+                    backgroundImage: `url("${collectionData[index].imageUrl}")`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
@@ -121,12 +121,12 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                         variant='h3'
                         fontFamily={playfair.style.fontFamily}
                     >
-                        {data[index].name} Collection
+                        {collectionData[index].name} Collection
                     </Typography>
                     <Typography
                         variant='h6'
                     >
-                        {data[index].description}
+                        {collectionData[index].description}
                     </Typography>
                 </Stack>
                 <Stack
@@ -148,14 +148,14 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, data }) => {
                             variant='h5'
                             fontFamily={playfair.style.fontFamily}
                         >
-                            {data[index].prodName}
+                            {collectionData[index].prodName}
                         </Typography>
                         <Typography
                             variant='h6'
                             color='gold'
                             fontWeight={100}
                         >
-                            ${data[index].price}
+                            ${collectionData[index].price}
                         </Typography>
                         <Button
                             variant='outlined'
