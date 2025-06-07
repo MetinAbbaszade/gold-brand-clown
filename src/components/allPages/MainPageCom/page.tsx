@@ -7,6 +7,8 @@ import MainAboutSection from "@/components/_common/MainAboutSection";
 import MainTestimonials from "@/components/_common/MainTestimonials";
 import { getAllTestimonials } from "@/api/testimonials";
 import SubscribeSection from "@/components/_common/SubscribeSection";
+import Footer from "@/components/_common/Footer";
+import MainFooter from "@/components/_common/MainFooter";
 
 
 
@@ -52,9 +54,15 @@ const MainPageCom = async () => {
                 <MainTestimonials playfair={playfair} montserrat={montserrat} testimonialsData={testimonialsData} />
             </Stack>
             <Stack
-                m={'50px 0'}
+                m={'50px 0 0'}
             >
                 <SubscribeSection playfair={playfair} montserrat={montserrat} />
+            </Stack>
+            <Stack>
+                <MainFooter playfair={playfair} montserrat={montserrat}/>
+            </Stack>
+            <Stack>
+                <Footer montserrat={montserrat}/>
             </Stack>
         </Stack>
     );
