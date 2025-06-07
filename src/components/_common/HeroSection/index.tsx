@@ -4,8 +4,7 @@ import { Box, Button, Stack, Typography } from '@mui/material'
 import { motion } from 'framer-motion';
 import { NextFont } from 'next/dist/compiled/@next/font';
 
-
-interface IProp {
+export interface IProp {
     playfair: NextFont
 }
 const MotionButton = motion(Button)
@@ -38,11 +37,13 @@ export const containerVariants = {
 
 
 const itemVariants = {
-    hidden: { opacity: 0, y: 75, x: 75 },
+    hidden: {
+        opacity: 0,
+        y: 75
+    },
     visible: {
         opacity: 1,
         y: 0,
-        x: 0,
         transition: {
             duration: 1.2,
             ease: [0.33, 1, 0.68, 1],
