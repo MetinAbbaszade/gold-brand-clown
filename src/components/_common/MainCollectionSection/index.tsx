@@ -4,6 +4,8 @@ import { Box, Button, Divider, Stack, Typography } from '@mui/material';
 import { NextFont } from 'next/dist/compiled/@next/font';
 import React, { useEffect, useState } from 'react';
 import { MotionStack } from '../HeroSection';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 
 interface ICollection {
     name: string;
@@ -173,7 +175,27 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, collectionData }) =>
                     </Stack>
                 </Stack>
             </MotionStack>
-        </Stack>
+            <Stack>
+                <Stack component={Button} onClick={() => setIndex((i) => (i += 1) % collectionData.length)}>
+                    <ChevronRightIcon sx={{ bgcolor: 'red' }} />
+                </Stack>
+                {[...Array(collectionData.length).keys()].map((i) => (
+                    <Stack
+                        key={i}
+                        width={'20px'}
+                        height={'20px'}
+                        borderRadius={'50%'}
+                        bgcolor={i === index ? 'red' : 'black'}
+                        zIndex={2}
+                    ></Stack>
+                ))}
+                <Stack component={Button} onClick={() =>
+                    setIndex((i) => (i - 1 + collectionData.length) % collectionData.length)
+                }>
+                    <KeyboardArrowLeftIcon sx={{ bgcolor: 'red' }} />
+                </Stack>
+            </Stack>
+        </Stack >
     );
 }
 
