@@ -3,6 +3,7 @@ import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
 import { Playfair_Display } from "next/font/google";
 import { getAllCollection } from "@/api/collection";
+import MainAboutSection from "@/components/_common/MainAboutSection";
 
 
 
@@ -28,6 +29,11 @@ const MainPageCom = async () => {
                 p={'50px 0'}
             >
                 <MainCollectionSection playfair={playfair} data={data} />
+            </Stack>
+            <Stack
+                m={'40px 0'}
+            >
+                <MainAboutSection playfair={playfair} />
             </Stack>
         </Stack>
     );
