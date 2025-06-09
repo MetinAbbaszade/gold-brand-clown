@@ -189,8 +189,9 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, collectionData }) =>
                             borderRadius={'50%'}
                             width={'50px'}
                             height={'50px'}
+                            border='1px solid rgba(255, 255, 255, 0.3)'
                         >
-                            <KeyboardArrowLeftIcon sx={{ color: '#fff', fontSize: '25px' }} />
+                            <KeyboardArrowLeftIcon sx={{ color: '#fff', fontSize: '30px' }} />
                         </Stack>
                         <Stack direction={'row'} spacing={1}>
                             {[...Array(collectionData.length).keys()].map((i) => (
@@ -211,8 +212,9 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, collectionData }) =>
                             borderRadius={'50%'}
                             width={'50px'}
                             height={'50px'}
+                            border='1px solid rgba(255, 255, 255, 0.3)'
                         >
-                            <ChevronRightIcon sx={{ color: '#fff', fontSize: '25px' }} />
+                            <ChevronRightIcon sx={{ color: '#fff', fontSize: '30px' }} />
                         </Stack>
                     </Stack>
                 </Stack>
