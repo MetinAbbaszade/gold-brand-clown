@@ -131,70 +131,92 @@ const MainCollectionSection: React.FC<IComp> = ({ playfair, collectionData }) =>
                         {collectionData[index].description}
                     </Typography>
                 </Stack>
-                <Stack
-                    direction={'row'}
-                    spacing={0}
-                    zIndex={2}
-                    mb={10}
-                >
-                    <Divider sx={{ bgcolor: 'gold', width: '2px' }} orientation="vertical" flexItem />
+                <Stack direction={'row'} spacing={30}>
                     <Stack
-                        component={'section'}
-                        bgcolor={'rgba(0,0,0,0.5)'}
-                        minWidth={'300px'}
-                        p={'50px 20px'}
-                        spacing={2}
-
+                        direction={'row'}
+                        spacing={0}
+                        zIndex={2}
+                        mb={10}
                     >
-                        <Typography
-                            variant='h5'
-                            fontFamily={playfair.style.fontFamily}
+                        <Divider sx={{ bgcolor: 'gold', width: '2px' }} orientation="vertical" flexItem />
+                        <Stack
+                            component={'section'}
+                            bgcolor={'rgba(0,0,0,0.5)'}
+                            minWidth={'300px'}
+                            p={'50px 20px'}
+                            spacing={2}
+
                         >
-                            {collectionData[index].prodName}
-                        </Typography>
-                        <Typography
-                            variant='h6'
-                            color='gold'
-                            fontWeight={100}
+                            <Typography
+                                variant='h5'
+                                fontFamily={playfair.style.fontFamily}
+                            >
+                                {collectionData[index].prodName}
+                            </Typography>
+                            <Typography
+                                variant='h6'
+                                color='gold'
+                                fontWeight={100}
+                            >
+                                ${collectionData[index].price}
+                            </Typography>
+                            <Button
+                                variant='outlined'
+                                sx={{
+                                    color: '#fff',
+                                    alignSelf: 'flex-start',
+                                    border: '1px solid gold',
+                                    padding: '10px 20px',
+                                    opacity: 0.8,
+                                }}
+                                href='/collections'
+                            >
+                                Shop Now
+                            </Button>
+                        </Stack>
+                    </Stack>
+                    <Stack
+                        direction={'row'}
+                        alignSelf={'flex-end'}
+                        alignItems={'center'}
+                        spacing={2}
+                        zIndex={100}
+                    >
+                        <Stack
+                            component={Button}
+                            onClick={() => setIndex((i) => (i += 1) % collectionData.length)}
+                            sx={{ bgcolor: 'rgba(255, 255, 255, 0.2);' }}
+                            borderRadius={'50%'}
+                            width={'50px'}
+                            height={'50px'}
                         >
-                            ${collectionData[index].price}
-                        </Typography>
-                        <Button
-                            variant='outlined'
-                            sx={{
-                                color: '#fff',
-                                alignSelf: 'flex-start',
-                                border: '1px solid gold',
-                                padding: '10px 20px',
-                                opacity: 0.8,
-                            }}
-                            href='/collections'
+                            <KeyboardArrowLeftIcon sx={{ color: '#fff', fontSize: '25px' }} />
+                        </Stack>
+                        <Stack direction={'row'} spacing={1}>
+                            {[...Array(collectionData.length).keys()].map((i) => (
+                                <Stack
+                                    key={i}
+                                    width={'10px'}
+                                    height={'10px'}
+                                    borderRadius={'50%'}
+                                    bgcolor={i === index ? '#d4af36' : 'rgba(255, 255, 255, 0.4)'}
+                                    zIndex={2}
+                                ></Stack>
+                            ))}
+                        </Stack>
+                        <Stack
+                            component={Button}
+                            onClick={() => setIndex((i) => (i += 1) % collectionData.length)}
+                            sx={{ bgcolor: 'rgba(255, 255, 255, 0.2);' }}
+                            borderRadius={'50%'}
+                            width={'50px'}
+                            height={'50px'}
                         >
-                            Shop Now
-                        </Button>
+                            <ChevronRightIcon sx={{ color: '#fff', fontSize: '25px' }} />
+                        </Stack>
                     </Stack>
                 </Stack>
             </MotionStack>
-            <Stack>
-                <Stack component={Button} onClick={() => setIndex((i) => (i += 1) % collectionData.length)}>
-                    <ChevronRightIcon sx={{ bgcolor: 'red' }} />
-                </Stack>
-                {[...Array(collectionData.length).keys()].map((i) => (
-                    <Stack
-                        key={i}
-                        width={'20px'}
-                        height={'20px'}
-                        borderRadius={'50%'}
-                        bgcolor={i === index ? 'red' : 'black'}
-                        zIndex={2}
-                    ></Stack>
-                ))}
-                <Stack component={Button} onClick={() =>
-                    setIndex((i) => (i - 1 + collectionData.length) % collectionData.length)
-                }>
-                    <KeyboardArrowLeftIcon sx={{ bgcolor: 'red' }} />
-                </Stack>
-            </Stack>
         </Stack >
     );
 }
