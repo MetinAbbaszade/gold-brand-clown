@@ -41,7 +41,6 @@ const navItems: Array<INavItems> = [
 
 const Navbar = () => {
     const pathname = usePathname()
-
     return (
         <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
             <Toolbar sx={{ justifyContent: 'space-around' }}>
@@ -64,16 +63,24 @@ const Navbar = () => {
 
                 {/* Center Side */}
                 <Stack direction={'row'} spacing={3}>
-                    {navItems.map((item) => (
-                        <Stack key={item.text}>
-                            <Link href={item.href} key={item.text}>
-                                <Stack textTransform={'uppercase'} letterSpacing={'1px'}>
-                                    {item.text}
-                                </Stack>
-                            </Link>
-                            {pathname === item.href ? <Divider sx={{ bgcolor: 'gold' }} /> : null}
-                        </Stack>
-                    ))}
+                    {navItems.map((item) => {
+                        const isActive = pathname === item.href
+                        return (
+                            <Stack key={item.text}>
+                                <Link href={item.href} key={item.text}>
+                                    <Stack 
+                                    textTransform={'uppercase'}
+                                    letterSpacing={'1px'}
+                                    color={isActive ? '#d4af36' : 'inherit'}
+                                    >
+                                        {item.text}
+                                    </Stack>
+                                </Link>
+                                {isActive ? <Divider sx={{ bgcolor: 'gold' }} /> : null}
+                            </Stack>
+                        )
+                    }
+                    )}
                 </Stack>
 
                 {/* Right Side */}

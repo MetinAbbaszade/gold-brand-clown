@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material"
 import { NextFont } from "next/dist/compiled/@next/font"
 
 interface IProp {
-    montserrat: NextFont
+    montserrat?: NextFont
 }
 
 const Footer: React.FC<IProp> = ({ montserrat }) => {

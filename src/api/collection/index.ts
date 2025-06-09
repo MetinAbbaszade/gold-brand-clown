@@ -1,9 +1,10 @@
-export async function getAllCollection() {
+export async function getAllCollections() {
     const data = await fetch('http://localhost:4000/collections')
-    if (!data) {
-        return 'not found'
-    }
-    const jsonFormat = await data.json()
 
-    return jsonFormat;
+    if (!data) {
+        return null
+    }
+
+    const jsonFormat = await data.json()
+    return jsonFormat
 }

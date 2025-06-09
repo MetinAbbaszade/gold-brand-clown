@@ -2,7 +2,7 @@ import { Stack } from "@mui/material";
 import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
 import { Montserrat, Playfair_Display } from "next/font/google";
-import { getAllCollection } from "@/api/collection";
+import { getAllCollection } from "@/api/mainCollection";
 import MainAboutSection from "@/components/_common/MainAboutSection";
 import MainTestimonials from "@/components/_common/MainTestimonials";
 import { getAllTestimonials } from "@/api/testimonials";
