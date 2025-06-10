@@ -1,7 +1,7 @@
 import { Stack } from "@mui/material";
 import "./globals.css";
 import Navbar from "@/components/_common/Navbar/Navbar";
-import ThemeRegistry from "./ThemeRegistry";
+import ThemeRegistry from "../providers/ThemeRegistry";
 import { Suspense } from "react";
 import Loading from "./loading";
 
