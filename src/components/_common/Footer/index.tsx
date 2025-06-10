@@ -1,11 +1,9 @@
 import { Stack, Typography } from "@mui/material"
 import { NextFont } from "next/dist/compiled/@next/font"
 
-interface IProp {
-    montserrat?: NextFont
-}
 
-const Footer: React.FC<IProp> = ({ montserrat }) => {
+
+const Footer = () => {
     return (
         <Stack
             justifyContent={'center'}
@@ -16,7 +14,6 @@ const Footer: React.FC<IProp> = ({ montserrat }) => {
         >
             <Typography
                 variant='caption'
-                fontFamily={montserrat?.style.fontFamily}
             >
                 &copy; 2025 GoldBrand. All Rights Reserved.
             </Typography>

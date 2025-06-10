@@ -1,5 +1,5 @@
 import CollectionsPage from "@/components/allPages/CollectionsPage";
-import { montserrat, playfair } from "@/components/allPages/MainPageCom/page";
+import { playfair } from "@/components/allPages/MainPageCom/page";
 import { Stack } from "@mui/material";
 import { Metadata } from "next";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const page = () => {
   return (
     <Stack marginTop={'80px'} minWidth={'100vw'}>
-      <CollectionsPage playfair={playfair} montserrat={montserrat} />
+      <CollectionsPage playfair={playfair}/>
     </Stack>
   )
 }

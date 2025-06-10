@@ -15,12 +15,11 @@ interface ITestimonials {
 
 interface IProp {
     playfair: NextFont
-    montserrat: NextFont
     testimonialsData: ITestimonials[]
 }
 
 
-const MainTestimonials: React.FC<IProp> = ({ playfair, montserrat, testimonialsData }) => {
+const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 
     const [index, setIndex] = useState(0)
 
@@ -57,7 +56,7 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, montserrat, testimonialsD
                     }}
                 />
                 <Typography
-                    fontFamily={montserrat?.style.fontFamily}
+            
                     mt={1}
                 >Treasured words from our value clients</Typography>
             </Stack>
@@ -81,7 +80,7 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, montserrat, testimonialsD
                     }} />
                     <Typography
                         color='#666'
-                        fontFamily={montserrat?.style.fontFamily}
+                
                         variant='body1'
                     >{testimonialsData[index].name}</Typography>
                 </Stack>

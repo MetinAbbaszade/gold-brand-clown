@@ -2,7 +2,7 @@ import { Button, Stack, TextField, Typography } from "@mui/material"
 import { IProp, MotionStack } from "../HeroSection"
 import { containerFramer } from "../MainAboutSection"
 
-const SubscribeSection: React.FC<IProp> = ({ playfair, montserrat }) => {
+const SubscribeSection: React.FC<IProp> = ({ playfair }) => {
     return (
         <MotionStack
             variants={containerFramer}
@@ -26,9 +26,7 @@ const SubscribeSection: React.FC<IProp> = ({ playfair, montserrat }) => {
                     fontFamily={playfair.style.fontFamily}
                     variant='h4'
                 >Join Our Inner Circle</Typography>
-                <Typography
-                    fontFamily={montserrat?.style.fontFamily}
-                >
+                <Typography>
                     Be the first to receive exclusive updates, private event invitations, and collection previews.
                     Your Email Address
                 </Typography>

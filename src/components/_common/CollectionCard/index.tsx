@@ -5,10 +5,9 @@ import { NextFont } from "next/dist/compiled/@next/font"
 export interface IProp {
     data: IData
     playfair?: NextFont
-    montserrat?: NextFont
 }
 
-const CollectionCard: React.FC<IProp> = ({ data: { name, description, image }, playfair, montserrat }) => {
+const CollectionCard: React.FC<IProp> = ({ data: { name, description, image }, playfair }) => {
     return (
         <Stack
             minWidth={'300px'}
@@ -78,7 +77,6 @@ const CollectionCard: React.FC<IProp> = ({ data: { name, description, image }, p
                 </Typography>
                 <Typography
                     variant='body2'
-                    fontFamily={montserrat!.style.fontFamily}
                 >
                     {description}
                 </Typography>

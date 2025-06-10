@@ -1,13 +1,11 @@
 import { Divider, Grid, Stack, Typography } from "@mui/material"
 import { NextFont } from "next/dist/compiled/@next/font"
-import Footer from "../Footer"
 
 interface IProp {
     playfair?: NextFont
-    montserrat?: NextFont
 }
 
-const CollectionFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
+const CollectionFooter: React.FC<IProp> = ({ playfair }) => {
     return (
         <Stack
             bgcolor={'#222222'}
@@ -54,38 +52,23 @@ const CollectionFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
                         </Typography>
                     </Grid>
                     <Grid size={{ md: 4 }}>
-                        <Typography
-                            fontFamily={montserrat?.style.fontFamily}
-                            fontWeight={100}
-                        >
+                        <Typography fontWeight={100}>
                             Crafting timeless elegance since 1995
                         </Typography>
                     </Grid>
                     <Grid size={{ md: 4 }} spacing={1}>
-                        <Typography
-                            fontFamily={montserrat?.style.fontFamily}
-                            fontWeight={100}
-                        >
+                        <Typography fontWeight={100}>
                             123 Gold Street
                         </Typography>
-                        <Typography
-                            fontFamily={montserrat?.style.fontFamily}
-                            fontWeight={100}
-                        >
+                        <Typography fontWeight={100}>
                             Luxury Avenue
                         </Typography>
-                        <Typography
-                            fontFamily={montserrat?.style.fontFamily}
-                            fontWeight={100}
-                        >
+                        <Typography fontWeight={100}>
                             New York, NY 10001
                         </Typography>
                     </Grid>
                     <Grid size={{ md: 4 }}>
-                        <Typography
-                            fontFamily={montserrat?.style.fontFamily}
-                            fontWeight={100}
-                        >
+                        <Typography fontWeight={100}>
                             Social Media
                         </Typography>
                     </Grid>
@@ -100,9 +83,6 @@ const CollectionFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
                     <Typography
                         color="#999999"
                         variant="body2"
-                        sx={{
-                            fontFamily: montserrat?.style.fontFamily
-                        }}
                     >
                         © 2025 GoldBrand. All rights reserved.
                     </Typography>

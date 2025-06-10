@@ -17,7 +17,7 @@ export const containerFramer = {
     }
 }
 
-const MainAboutSection: React.FC<IProp> = ({ playfair, montserrat }) => {
+const MainAboutSection: React.FC<IProp> = ({ playfair }) => {
 
 
 
@@ -51,10 +51,10 @@ const MainAboutSection: React.FC<IProp> = ({ playfair, montserrat }) => {
                         bgcolor: '#d4af38'
                     }}
                 />
-                <Typography fontFamily={montserrat?.style.fontFamily} lineHeight={2}>
+                <Typography lineHeight={2}>
                     Since 1896, GoldBrand has been creating exquisite jewelry that combines traditional craftsmanship with contemporary design. Each piece is meticulously handcrafted by our master artisans using only the finest ethically sourced materials.
                 </Typography>
-                <Typography fontFamily={montserrat?.style.fontFamily} lineHeight={2}>
+                <Typography lineHeight={2}>
                     Our commitment to excellence ensures that every creation becomes a treasured heirloom, passed down through generations.
                 </Typography>
                 <Stack
@@ -70,7 +70,7 @@ const MainAboutSection: React.FC<IProp> = ({ playfair, montserrat }) => {
                     }}
                     spacing={0.3}
                 >
-                    <Typography color='#d4af38' fontFamily={montserrat?.style.fontFamily} >
+                    <Typography color='#d4af38' >
                         Learn more about our heritage
                     </Typography>
                     <ArrowRightAltIcon

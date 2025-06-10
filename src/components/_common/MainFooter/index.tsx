@@ -27,7 +27,7 @@ const datas = {
     ]
 }
 
-const MainFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
+const MainFooter: React.FC<IProp> = ({ playfair }) => {
     return (
         <MotionStack
             variants={containerFramer}
@@ -54,7 +54,6 @@ const MainFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
                     >GOLDBRAND
                     </Typography>
                     <Typography
-                        fontFamily={montserrat?.style.fontFamily}
                         variant="body2"
                     >Timeless elegance since 1896
                     </Typography>
@@ -99,7 +98,6 @@ const MainFooter: React.FC<IProp> = ({ playfair, montserrat }) => {
                                             <Typography
                                                 mb={'10px'}
                                                 sx={{
-                                                    fontFamily: montserrat?.style.fontFamily,
                                                     color: '#666',
                                                     fontSize: '14px',
                                                     fontWeight: 400

@@ -1,7 +1,7 @@
 import { Button, Grid, Stack, Typography } from "@mui/material"
 import { IProp } from "../CollectionCard"
 
-const FeaturedCollection: React.FC<IProp> = ({ data: { name, longDescription, image }, playfair, montserrat }) => {
+const FeaturedCollection: React.FC<IProp> = ({ data: { name, longDescription, image }, playfair }) => {
     return (
         <Stack
             height={'500px'}
@@ -39,7 +39,6 @@ const FeaturedCollection: React.FC<IProp> = ({ data: { name, longDescription, im
                             {name}
                         </Typography>
                         <Typography
-                            fontFamily={montserrat?.style.fontFamily}
                             letterSpacing={1}
                             lineHeight={1.5}
                         >{longDescription}

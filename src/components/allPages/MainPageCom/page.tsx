@@ -17,11 +17,6 @@ export const playfair = Playfair_Display({
     weight: '400'
 });
 
-export const montserrat = Montserrat({
-    subsets: ['latin'],
-    weight: '400'
-})
-
 
 
 const MainPageCom = async () => {
@@ -46,23 +41,23 @@ const MainPageCom = async () => {
             <Stack
                 m={'40px 0'}
             >
-                <MainAboutSection playfair={playfair} montserrat={montserrat} />
+                <MainAboutSection playfair={playfair}/>
             </Stack>
             <Stack
                 m={'50px 0'}
             >
-                <MainTestimonials playfair={playfair} montserrat={montserrat} testimonialsData={testimonialsData} />
+                <MainTestimonials playfair={playfair}testimonialsData={testimonialsData} />
             </Stack>
             <Stack
                 m={'50px 0 0'}
             >
-                <SubscribeSection playfair={playfair} montserrat={montserrat} />
+                <SubscribeSection playfair={playfair}/>
             </Stack>
             <Stack>
-                <MainFooter playfair={playfair} montserrat={montserrat}/>
+                <MainFooter playfair={playfair}/>
             </Stack>
             <Stack>
-                <Footer montserrat={montserrat}/>
+                <Footer/>
             </Stack>
         </Stack>
     );

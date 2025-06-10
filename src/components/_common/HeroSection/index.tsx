@@ -6,7 +6,6 @@ import { NextFont } from 'next/dist/compiled/@next/font';
 
 export interface IProp {
     playfair: NextFont
-    montserrat?: NextFont
 }
 const MotionButton = motion(Button)
 export const MotionStack = motion(Stack)

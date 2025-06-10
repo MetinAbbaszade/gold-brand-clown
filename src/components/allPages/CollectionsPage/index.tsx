@@ -8,7 +8,6 @@ import React from "react"
 
 interface IProp {
     playfair: NextFont
-    montserrat: NextFont
 }
 
 export interface IData {
@@ -20,7 +19,7 @@ export interface IData {
     link: string
 }
 
-const CollectionsPage: React.FC<IProp> = async ({ playfair, montserrat }) => {
+const CollectionsPage: React.FC<IProp> = async ({ playfair }) => {
     const datas: IData[] = await getAllCollections()
 
     return (
@@ -44,7 +43,6 @@ const CollectionsPage: React.FC<IProp> = async ({ playfair, montserrat }) => {
                         Our Collections
                     </Typography>
                     <Typography
-                        fontFamily={montserrat.style.fontFamily}
                         variant='subtitle1'
                     >
                         Discover our exquisite gold creations, each piece telling a unique story of craftsmanship and elegance
@@ -63,13 +61,13 @@ const CollectionsPage: React.FC<IProp> = async ({ playfair, montserrat }) => {
                 >
                     {datas.map((data) => (
                         <Grid key={data.id} size={{ md: 4 }}>
-                            <CollectionCard data={data} playfair={playfair} montserrat={montserrat} />
+                            <CollectionCard data={data} playfair={playfair} />
                         </Grid>
                     ))}
                 </Grid>
             </Stack>
             <Stack>
-                <FeaturedCollection data={datas[Math.floor(Math.random() * 9)]} playfair={playfair} montserrat={montserrat} />
+                <FeaturedCollection data={datas[Math.floor(Math.random() * 9)]} playfair={playfair} />
             </Stack>
             <Stack>
                 <CollectionFooter playfair={playfair} />
