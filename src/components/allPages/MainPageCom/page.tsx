@@ -41,23 +41,23 @@ const MainPageCom = async () => {
             <Stack
                 m={'40px 0'}
             >
-                <MainAboutSection playfair={playfair}/>
+                <MainAboutSection playfair={playfair} />
             </Stack>
             <Stack
                 m={'50px 0'}
             >
-                <MainTestimonials playfair={playfair}testimonialsData={testimonialsData} />
+                <MainTestimonials playfair={playfair} testimonialsData={testimonialsData} />
             </Stack>
             <Stack
                 m={'50px 0 0'}
             >
-                <SubscribeSection playfair={playfair}/>
+                <SubscribeSection playfair={playfair} />
             </Stack>
             <Stack>
-                <MainFooter playfair={playfair}/>
+                <MainFooter playfair={playfair} />
             </Stack>
             <Stack>
-                <Footer/>
+                <Footer />
             </Stack>
         </Stack>
     );

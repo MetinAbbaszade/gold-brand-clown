@@ -34,6 +34,7 @@ const MainAboutSection: React.FC<IProp> = ({ playfair }) => {
             direction={'row'}
             justifyContent={'space-between'}
             alignItems={'center'}
+            spacing={10}
         >
             <Stack
                 maxWidth={'50%'}
