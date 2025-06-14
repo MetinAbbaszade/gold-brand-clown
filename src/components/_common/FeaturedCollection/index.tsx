@@ -1,9 +1,18 @@
 import { Button, Grid, Stack, Typography } from "@mui/material"
 import { IProp } from "../CollectionCard"
+import { stackVariant } from "../CollectionFooter"
+import { MotionStack } from "../HeroSection"
 
 const FeaturedCollection: React.FC<IProp> = ({ data: { name, longDescription, image }, playfair }) => {
     return (
-        <Stack
+        <MotionStack
+            variants={stackVariant}
+            initial="screenoff"
+            whileInView={"screenon"}
+            viewport={{
+                once: true,
+                amount: 0.5
+            }}
             height={'500px'}
             bgcolor={'#f5f5f5'}
             alignItems={'center'}
@@ -70,7 +79,7 @@ const FeaturedCollection: React.FC<IProp> = ({ data: { name, longDescription, im
                     />
                 </Grid>
             </Grid>
-        </Stack>
+        </MotionStack>
     )
 }
 

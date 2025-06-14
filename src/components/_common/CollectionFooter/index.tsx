@@ -1,13 +1,32 @@
 import { Divider, Grid, Stack, Typography } from "@mui/material"
 import { NextFont } from "next/dist/compiled/@next/font"
+import { MotionStack } from "../HeroSection";
 
 interface IProp {
     playfair?: NextFont
 }
 
+export const stackVariant = {
+    screenoff: { opacity: 0 },
+    screenon: {
+        opacity: 1,
+        transition: {
+            duration: 0.5,
+            ease: "easeInOut"
+        }
+    }
+};
+
 const CollectionFooter: React.FC<IProp> = ({ playfair }) => {
     return (
-        <Stack
+        <MotionStack
+            variants={stackVariant}
+            initial="screenoff"
+            whileInView={"screenon"}
+            viewport={{
+                once: true,
+                amount: 0.5
+            }}
             bgcolor={'#222222'}
             color={'#fff'}
             m={'0 auto'}
@@ -88,7 +107,7 @@ const CollectionFooter: React.FC<IProp> = ({ playfair }) => {
                     </Typography>
                 </Stack>
             </Stack>
-        </Stack>
+        </MotionStack>
     )
 }
 

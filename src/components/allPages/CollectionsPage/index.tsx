@@ -2,6 +2,7 @@ import { getAllCollections } from "@/api/collection"
 import CollectionCard from "@/components/_common/CollectionCard"
 import CollectionFooter from "@/components/_common/CollectionFooter"
 import FeaturedCollection from "@/components/_common/FeaturedCollection"
+import { MotionStack } from "@/components/_common/HeroSection"
 import { Grid, Stack, Typography } from "@mui/material"
 import { NextFont } from "next/dist/compiled/@next/font"
 import React from "react"
@@ -18,6 +19,8 @@ export interface IData {
     image: string,
     link: string
 }
+
+
 
 const CollectionsPage: React.FC<IProp> = async ({ playfair }) => {
     const datas: IData[] = await getAllCollections()
