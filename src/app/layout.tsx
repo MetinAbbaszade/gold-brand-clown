@@ -1,28 +1,10 @@
-import { Stack } from "@mui/material";
-import "./globals.css";
-import Navbar from "@/components/_common/Navbar/Navbar";
-import ThemeRegistry from "../providers/ThemeRegistry";
-import { Suspense } from "react";
-import Loading from "./loading";
+import LayoutWrapper from '@/components/allPages/LayoutWrapper/LayoutWrapper';
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html>
       <body style={{ margin: 0 }}>
-        <Suspense fallback={<Loading />}>
-          <ThemeRegistry>
-            <Stack>
-              <Navbar />
-            </Stack>
-            <Stack component={'main'} position={'absolute'}>
-              {children}
-            </Stack>
-          </ThemeRegistry>
-        </Suspense>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );

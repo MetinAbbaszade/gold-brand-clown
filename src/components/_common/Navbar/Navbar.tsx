@@ -10,9 +10,10 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link"
 import { Playfair_Display } from "next/font/google";
-import React from "react";
+import React, { useContext } from "react";
 import { usePathname } from "next/navigation";
 import { Divider } from "@mui/material";
+import { AuthContext } from "@/context/AuthContext";
 
 export const playfair = Playfair_Display({
     subsets: ['latin'],
@@ -41,6 +42,7 @@ const navItems: Array<INavItems> = [
 
 const Navbar = () => {
     const pathname = usePathname()
+    const { auth } = useContext(AuthContext)
     return (
         <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
             <Toolbar sx={{ justifyContent: 'space-around' }}>
@@ -68,13 +70,13 @@ const Navbar = () => {
                         return (
                             <Stack key={item.text}>
                                 <Link href={item.href} key={item.text}>
-                                    <Stack 
-                                    textTransform={'uppercase'}
-                                    letterSpacing={'1px'}
-                                    color={isActive ? '#d4af36' : 'inherit'}
+                                    <Typography
+                                        textTransform={'uppercase'}
+                                        letterSpacing={'1px'}
+                                        color={isActive ? '#d4af36' : 'inherit'}
                                     >
                                         {item.text}
-                                    </Stack>
+                                    </Typography>
                                 </Link>
                                 {isActive ? <Divider sx={{ bgcolor: 'gold' }} /> : null}
                             </Stack>
@@ -88,12 +90,17 @@ const Navbar = () => {
                     <IconButton color="inherit" aria-label="search">
                         <SearchIcon />
                     </IconButton>
-                    <IconButton component={Link} href="/profile" color="inherit">
+                    <IconButton component={Link} href={auth.id ? "/profile" : "/auth"} color="inherit">
                         <PersonOutlineIcon />
                     </IconButton>
-                    <IconButton component={Link} href="/cart" color="inherit">
-                        <ShoppingBagIcon />
-                    </IconButton>
+                    {
+                        auth.id &&
+                        (
+                            <IconButton component={Link} href="/cart" color="inherit">
+                                <ShoppingBagIcon />
+                            </IconButton>
+                        )
+                    }
                 </Stack>
             </Toolbar>
         </AppBar>
