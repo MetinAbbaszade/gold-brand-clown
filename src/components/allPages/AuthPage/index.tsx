@@ -1,7 +1,13 @@
+"use client"
+
 import { heroContainerVariants, MotionStack } from '@/components/_common/HeroSection'
-import { Stack, Typography } from '@mui/material'
+import { Button, Checkbox, Divider, FormControlLabel, Input, Stack, TextField, Typography } from '@mui/material'
 import { Cormorant_Garamond } from 'next/font/google'
 import React from 'react'
+import * as Yup from "yup"
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import Link from 'next/link'
+
 
 const cormonant = Cormorant_Garamond({
     subsets: ['latin'],
@@ -9,7 +15,34 @@ const cormonant = Cormorant_Garamond({
     display: 'swap',
 })
 
+interface LoginFormValues {
+    username: string
+    password: string
+}
+
+const initialValues: LoginFormValues = {
+    username: "",
+    password: "",
+};
+
+const validationSchema = Yup.object({
+    username: Yup.string().required("Username is required"),
+    password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required")
+        .matches(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/,
+            "Password must include uppercase, lowercase, number and special character"
+        )
+});
+
 const AuthPage = () => {
+
+    const handleSubmit = () => {
+        alert("Salam")
+    }
+
+
     return (
         <>
             <MotionStack
@@ -21,7 +54,9 @@ const AuthPage = () => {
                 bgcolor={'#fff'}
                 boxShadow={4}
                 borderRadius={'10px'}
+                flexDirection={'row'}
             >
+                {/* left side */}
                 <Stack
                     width={'50%'}
                     height={'100%'}
@@ -42,6 +77,9 @@ const AuthPage = () => {
                         letterSpacing={'2px'}
                         fontFamily={cormonant.style.fontFamily}
                         marginBottom={'2rem'}
+                        sx={{
+                            textTransform: 'uppercase'
+                        }}
                     >
                         Gold Brand
                     </Typography>
@@ -61,7 +99,78 @@ const AuthPage = () => {
                         Experience luxury designed for the modern individual.
                     </Typography>
                 </Stack>
-                <Stack></Stack>
+                {/* right side */}
+                <Stack
+                    p={'3rem'}
+                    flex={1}
+                >
+                    <Stack
+                        spacing={5}
+                    >
+                        <Stack
+                            gap={1}
+                        >
+                            <Stack gap={4} flexDirection={'row'}>
+                                <Typography>Sign In</Typography>
+                                <Typography>Create Account</Typography>
+                            </Stack>
+                            <Divider />
+                        </Stack>
+                        <Formik
+                            initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={handleSubmit}
+                        >
+                            <Form>
+                                <Stack
+                                    spacing={5}
+                                >
+                                    <Stack>
+                                        <TextField
+                                            variant="outlined"
+                                            name="username"
+                                            type="text"
+                                            placeholder="Email Adress"
+                                            fullWidth
+                                        />
+                                        <ErrorMessage name="username" component="div" className="text-red-500 text-sm mt-1" />
+                                    </Stack>
+                                    <Stack>
+                                        <TextField
+                                            variant="outlined"
+                                            name="password"
+                                            type="password"
+                                            placeholder="Enter your password"
+                                            fullWidth
+                                        />
+                                        <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                                    </Stack>
+                                    <Stack
+                                        flexDirection={'row'}
+                                        alignItems={'center'}
+                                        justifyContent={'space-between'}
+                                    >
+                                        <Stack >
+                                            <FormControlLabel control={<Checkbox />} label="Remember me" />
+                                        </Stack>
+                                        <Typography color='#d4af38'>Forgot password?</Typography>
+                                    </Stack>
+                                    <Button
+                                        variant='contained'
+                                        type="submit"
+                                        sx={{
+                                            bgcolor: '#d4af38',
+                                            border: 'none'
+                                        }}
+                                    >
+                                        Login
+                                    </Button>
+
+                                </Stack>
+                            </Form>
+                        </Formik>
+                    </Stack>
+                </Stack>
             </MotionStack>
         </>
     )
