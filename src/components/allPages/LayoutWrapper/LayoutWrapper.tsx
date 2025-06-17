@@ -26,7 +26,7 @@ export default function LayoutWrapper({
                                 <Navbar />
                             </Stack>
                         }
-                        <Stack component={'main'} position={'absolute'}>
+                        <Stack component={'main'} position={!isAuth ? 'absolute' : 'static'}>
                             {children}
                         </Stack>
                     </ThemeRegistry>
