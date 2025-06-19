@@ -32,7 +32,7 @@ const AuthPage = () => {
             initial={'hidden'}
             animate={'visible'}
             width={'900px'}
-            height={'600px'}
+            minHeight="600px"
             bgcolor={'#fff'}
             boxShadow={4}
             borderRadius={'10px'}
@@ -41,7 +41,7 @@ const AuthPage = () => {
             {/* left side */}
             <Stack
                 width={'50%'}
-                height={'100%'}
+                minHeight={'100%'}
                 color={"#fff"}
                 p={"3rem"}
                 justifyContent={'center'}
@@ -82,7 +82,7 @@ const AuthPage = () => {
                 </Typography>
             </Stack>
             {/* right side */}
-            <Stack p="3rem" flex={1}>
+            <Stack p="3rem" flex={1} height={'100%'}>
                 <Stack spacing={5}>
                     <Box>
                         <Tabs
