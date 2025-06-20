@@ -1,9 +1,8 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import { Button, Checkbox, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
 import * as Yup from "yup";
-import { FetchUserResponse, postUser } from "@/api/user";
-import { useContext, useState } from "react";
-import { useRouter } from "next/navigation";
+import { postUser } from "@/api/user";
+import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 
 export interface LoginFormValues {

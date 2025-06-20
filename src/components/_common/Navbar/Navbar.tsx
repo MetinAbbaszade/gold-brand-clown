@@ -12,7 +12,7 @@ import Link from "next/link"
 import { Playfair_Display } from "next/font/google";
 import React, { useContext } from "react";
 import { usePathname } from "next/navigation";
-import { Divider } from "@mui/material";
+import { Button, Divider } from "@mui/material";
 import { AuthContext } from "@/context/AuthContext";
 
 export const playfair = Playfair_Display({
@@ -42,7 +42,7 @@ const navItems: Array<INavItems> = [
 
 const Navbar = () => {
     const pathname = usePathname()
-    const { auth } = useContext(AuthContext)
+    const { auth, logOutFunction } = useContext(AuthContext)
     return (
         <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
             <Toolbar sx={{ justifyContent: 'space-around' }}>
@@ -86,21 +86,33 @@ const Navbar = () => {
                 </Stack>
 
                 {/* Right Side */}
-                <Stack direction="row" spacing={1}>
-                    <IconButton color="inherit" aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                    <IconButton component={Link} href={auth.userData ? "/profile" : "/auth"} color="inherit">
-                        <PersonOutlineIcon />
-                    </IconButton>
-                    {
-                        auth.userData &&
-                        (
-                            <IconButton component={Link} href="/cart" color="inherit">
-                                <ShoppingBagIcon />
-                            </IconButton>
-                        )
-                    }
+                <Stack direction="row" spacing={1} alignItems={'center'} gap={5} justifySelf={'flex-end'}>
+                    <Stack direction={'row'}>
+                        <IconButton color="inherit" aria-label="search">
+                            <SearchIcon />
+                        </IconButton>
+                        <IconButton component={Link} href={auth.userData ? "/profile" : "/auth"} color="inherit">
+                            <PersonOutlineIcon />
+                        </IconButton>
+                        {
+                            auth.userData &&
+                            (
+                                <IconButton component={Link} href="/cart" color="inherit">
+                                    <ShoppingBagIcon />
+                                </IconButton>
+                            )
+                        }
+                    </Stack>
+                    <Stack>
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            sx={{ bgcolor: '#d4af38', border: 'none' }}
+                            onClick={logOutFunction}
+                        >
+                            LogOut
+                        </Button>
+                    </Stack>
                 </Stack>
             </Toolbar>
         </AppBar>

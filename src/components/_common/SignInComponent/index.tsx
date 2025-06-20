@@ -1,12 +1,11 @@
 "use client"
 
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Checkbox, duration, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
+import { Button, Checkbox, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
 import * as Yup from "yup";
 import { useContext, useState } from "react";
 import fetchUserByEmail, { FetchUserResponse } from "@/api/user";
 import { motion } from 'framer-motion'
-import { useRouter } from "next/navigation";
 import { AuthContext } from "@/context/AuthContext";
 
 interface LoginFormValues {
@@ -43,8 +42,6 @@ const MotionTypography = motion(Typography)
 const SignInComponent = () => {
     const { loginFunction } = useContext(AuthContext)
     const [authError, setAuthError] = useState<string | null>(null);
-    const router = useRouter()
-
     const handleSubmit = async (values: LoginFormValues) => {
         setAuthError(null);
         const result: FetchUserResponse = await fetchUserByEmail(values);
@@ -53,7 +50,6 @@ const SignInComponent = () => {
             setAuthError(result.msg);
         } else {
             loginFunction(result.data)
-            router.push('/')
         }
     };
 

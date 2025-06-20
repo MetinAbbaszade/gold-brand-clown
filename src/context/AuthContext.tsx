@@ -1,6 +1,7 @@
 "use client";
 
 import { fetchUserById, User } from "@/api/user";
+import { useRouter } from "next/navigation";
 import { createContext, useCallback, useEffect, useState } from "react";
 
 interface IAuthContext {
@@ -19,11 +20,14 @@ interface IAuthProvider {
     isSignIn: boolean;
     setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
     handleChange: (_event: React.SyntheticEvent, newValue: number) => void
+    logOutFunction: () => void
 }
 
 export const AuthContext = createContext({} as IAuthProvider);
 
 const AuthContextProvider: React.FC<IProps> = ({ children }) => {
+
+    const router = useRouter()
     const [auth, setAuth] = useState<IAuthContext>({
         userData: undefined,
         token: '',
@@ -36,11 +40,21 @@ const AuthContextProvider: React.FC<IProps> = ({ children }) => {
         localStorage.setItem("token", token);
         setAuth({ userData: user, token });
         setLoading(false);
+        router.push('/')
     }, []);
 
     const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
         setIsSignIn(newValue === 0);
     };
+
+    const logOutFunction = () => {
+        setAuth({
+            userData: undefined,
+            token: '',
+        })
+        localStorage.removeItem('token')
+        router.push('/auth')
+    }
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -68,7 +82,7 @@ const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ auth, loading, loginFunction, isSignIn, handleChange, setIsSignIn }}>
+        <AuthContext.Provider value={{ auth, loading, loginFunction, isSignIn, handleChange, setIsSignIn, logOutFunction }}>
             {children}
         </AuthContext.Provider>
     );
