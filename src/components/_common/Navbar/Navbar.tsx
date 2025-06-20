@@ -104,14 +104,19 @@ const Navbar = () => {
                         }
                     </Stack>
                     <Stack>
-                        <Button
-                            variant="contained"
-                            type="submit"
-                            sx={{ bgcolor: '#d4af38', border: 'none' }}
-                            onClick={logOutFunction}
-                        >
-                            LogOut
-                        </Button>
+                        {
+                            auth.userData &&
+                            (
+                                <Button
+                                    variant="contained"
+                                    type="submit"
+                                    sx={{ bgcolor: '#d4af38', border: 'none' }}
+                                    onClick={logOutFunction}
+                                >
+                                    LogOut
+                                </Button>
+                            )
+                        }
                     </Stack>
                 </Stack>
             </Toolbar>
