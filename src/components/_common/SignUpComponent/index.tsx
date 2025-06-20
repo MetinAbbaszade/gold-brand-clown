@@ -1,13 +1,13 @@
 import { ErrorMessage, Form, Formik } from "formik";
-import { Button, Checkbox, FormControlLabel, Stack, TextField, Typography } from '@mui/material'
-import * as Yup from "yup"
+import { Button, Checkbox, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
+import * as Yup from "yup";
 
 interface LoginFormValues {
-    username: string
-    password: string
-    email: string
-    number: string
-    adress: string
+    username: string;
+    password: string;
+    email: string;
+    number: string;
+    address: string;
 }
 
 const initialValues: LoginFormValues = {
@@ -15,27 +15,44 @@ const initialValues: LoginFormValues = {
     password: "",
     email: "",
     number: "",
-    adress: ""
+    address: ""
 };
 
 const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    email: Yup.string().required("Email is required"),
+    username: Yup.string()
+        .min(3, "Username must be at least 3 characters")
+        .max(20, "Username can't be longer than 20 characters")
+        .matches(/^[a-zA-Z0-9_]+$/, "Username can only contain letters, numbers, and underscores")
+        .required("Username is required"),
+
+    email: Yup.string()
+        .email("Enter a valid email")
+        .required("Email is required"),
+
     password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Password is required")
+        .min(8, "Password must be at least 8 characters")
+        .max(32, "Password can't be longer than 32 characters")
         .matches(
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])/,
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
             "Password must include uppercase, lowercase, number and special character"
-        ),
-    number: Yup.string().required("Number is required"),
-    adress: Yup.string().required('Adress is required')
+        )
+        .required("Password is required"),
+
+    number: Yup.string()
+        .matches(/^\d{10,15}$/, "Enter a valid phone number")
+        .required("Number is required"),
+
+    address: Yup.string()
+        .min(5, "Address must be at least 5 characters")
+        .max(100, "Address can't be longer than 100 characters")
+        .required("Address is required")
 });
 
 const SignUpComponent = () => {
-    const handleSubmit = () => {
-        alert("Salam")
-    }
+    const handleSubmit = (values: LoginFormValues) => {
+        console.log("Form Submitted:", values);
+        alert("Form submitted successfully");
+    };
 
     return (
         <Formik
@@ -43,75 +60,80 @@ const SignUpComponent = () => {
             validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
-            <Form>
-                <Stack
-                    spacing={5}
-                    overflow={'hidden'}
-                >
-                    <Stack>
-                        <TextField
-                            variant="outlined"
-                            name="username"
-                            type="text"
-                            placeholder="Email Adress"
-                            fullWidth
-                        />
-                        <ErrorMessage name="username" component="div" className="text-red-500 text-sm mt-1" />
-                    </Stack>
-                    <Stack>
-                        <TextField
-                            variant="outlined"
-                            name="email"
-                            type="email"
-                            placeholder="Enter your Email"
-                            fullWidth
-                        />
-                        <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
-                    </Stack>
-                    <Stack>
-                        <TextField
-                            variant="outlined"
-                            name="number"
-                            type="text"
-                            placeholder="Enter your number"
-                            fullWidth
-                        />
-                        <ErrorMessage name="number" component="div" className="text-red-500 text-sm mt-1" />
-                    </Stack>
-                    <Stack>
-                        <TextField
-                            variant="outlined"
-                            name="adress"
-                            type="text"
-                            placeholder="Enter your Adress"
-                            fullWidth
-                        />
-                        <ErrorMessage name="adress" component="div" className="text-red-500 text-sm mt-1" />
-                    </Stack>
-                    <Stack
-                        flexDirection={'row'}
-                        alignItems={'center'}
-                        justifyContent={'space-between'}
-                    >
-                        <Stack >
-                            <FormControlLabel control={<Checkbox />} label="Remember me" />
+            {({ getFieldProps }) => (
+                <Form>
+                    <Stack spacing={5}>
+                        <Stack>
+                            <TextField
+                                label="Email Address"
+                                variant="outlined"
+                                fullWidth
+                                {...getFieldProps("email")}
+                            />
+                            <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
                         </Stack>
-                        <Typography color='#d4af38'>Forgot password?</Typography>
-                    </Stack>
-                    <Button
-                        variant='contained'
-                        type="submit"
-                        sx={{
-                            bgcolor: '#d4af38',
-                            border: 'none'
-                        }}
-                    >
-                        Login
-                    </Button>
-                </Stack>
-            </Form>
-        </Formik>
-    )
-}
 
-export default SignUpComponent
+                        <Stack>
+                            <TextField
+                                label="Username"
+                                variant="outlined"
+                                fullWidth
+                                {...getFieldProps("username")}
+                            />
+                            <ErrorMessage name="username" component="div" className="text-red-500 text-sm mt-1" />
+                        </Stack>
+
+                        <Stack>
+                            <TextField
+                                label="Phone Number"
+                                variant="outlined"
+                                fullWidth
+                                {...getFieldProps("number")}
+                            />
+                            <ErrorMessage name="number" component="div" className="text-red-500 text-sm mt-1" />
+                        </Stack>
+
+                        <Stack>
+                            <TextField
+                                label="Password"
+                                variant="outlined"
+                                type="password"
+                                fullWidth
+                                {...getFieldProps("password")}
+                            />
+                            <ErrorMessage name="password" component="div" className="text-red-500 text-sm mt-1" />
+                        </Stack>
+
+                        <Stack>
+                            <TextField
+                                label="Address"
+                                variant="outlined"
+                                fullWidth
+                                {...getFieldProps("address")}
+                            />
+                            <ErrorMessage name="address" component="div" className="text-red-500 text-sm mt-1" />
+                        </Stack>
+
+                        <Stack flexDirection="row" alignItems="center" justifyContent="space-between">
+                            <FormControlLabel control={<Checkbox />} label="Remember me" />
+                            <Typography color="#d4af38">Forgot password?</Typography>
+                        </Stack>
+
+                        <Button
+                            variant="contained"
+                            type="submit"
+                            sx={{
+                                bgcolor: '#d4af38',
+                                border: 'none'
+                            }}
+                        >
+                            Sign Up
+                        </Button>
+                    </Stack>
+                </Form>
+            )}
+        </Formik>
+    );
+};
+
+export default SignUpComponent;

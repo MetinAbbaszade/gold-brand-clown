@@ -90,11 +90,11 @@ const Navbar = () => {
                     <IconButton color="inherit" aria-label="search">
                         <SearchIcon />
                     </IconButton>
-                    <IconButton component={Link} href={auth.id ? "/profile" : "/auth"} color="inherit">
+                    <IconButton component={Link} href={auth.userData ? "/profile" : "/auth"} color="inherit">
                         <PersonOutlineIcon />
                     </IconButton>
                     {
-                        auth.id &&
+                        auth.userData &&
                         (
                             <IconButton component={Link} href="/cart" color="inherit">
                                 <ShoppingBagIcon />
