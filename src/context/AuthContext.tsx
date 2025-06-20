@@ -16,6 +16,9 @@ interface IAuthProvider {
     loading: boolean;
     auth: IAuthContext;
     loginFunction: (data: User) => void;
+    isSignIn: boolean;
+    setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+    handleChange: (_event: React.SyntheticEvent, newValue: number) => void
 }
 
 export const AuthContext = createContext({} as IAuthProvider);
@@ -26,6 +29,7 @@ const AuthContextProvider: React.FC<IProps> = ({ children }) => {
         token: '',
     });
     const [loading, setLoading] = useState(true);
+    const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
     const loginFunction = useCallback((user: User) => {
         const token = `${user.id}:${user.username}`;
@@ -33,6 +37,10 @@ const AuthContextProvider: React.FC<IProps> = ({ children }) => {
         setAuth({ userData: user, token });
         setLoading(false);
     }, []);
+
+    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+        setIsSignIn(newValue === 0);
+    };
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -60,7 +68,7 @@ const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     }, []);
 
     return (
-        <AuthContext.Provider value={{ auth, loading, loginFunction }}>
+        <AuthContext.Provider value={{ auth, loading, loginFunction, isSignIn, handleChange, setIsSignIn }}>
             {children}
         </AuthContext.Provider>
     );

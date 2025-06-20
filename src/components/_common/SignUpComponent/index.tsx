@@ -1,12 +1,15 @@
 import { ErrorMessage, Form, Formik } from "formik";
 import { Button, Checkbox, FormControlLabel, Stack, TextField, Typography } from '@mui/material';
 import * as Yup from "yup";
+import { FetchUserResponse, postUser } from "@/api/user";
+import { useContext, useState } from "react";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/context/AuthContext";
 
-interface LoginFormValues {
+export interface LoginFormValues {
     username: string;
     password: string;
     email: string;
-    number: string;
     address: string;
 }
 
@@ -14,7 +17,6 @@ const initialValues: LoginFormValues = {
     username: "",
     password: "",
     email: "",
-    number: "",
     address: ""
 };
 
@@ -37,11 +39,6 @@ const validationSchema = Yup.object({
             "Password must include uppercase, lowercase, number and special character"
         )
         .required("Password is required"),
-
-    number: Yup.string()
-        .matches(/^\d{10,15}$/, "Enter a valid phone number")
-        .required("Number is required"),
-
     address: Yup.string()
         .min(5, "Address must be at least 5 characters")
         .max(100, "Address can't be longer than 100 characters")
@@ -49,15 +46,21 @@ const validationSchema = Yup.object({
 });
 
 const SignUpComponent = () => {
-    const handleSubmit = (values: LoginFormValues) => {
-        console.log("Form Submitted:", values);
-        alert("Form submitted successfully");
+    const { setIsSignIn } = useContext(AuthContext)
+    const handleSubmit = async (values: LoginFormValues) => {
+        const result = await postUser(values);
+        if ("msg" in result) {
+            alert(result.msg);
+            return;
+        }
+        alert("Xoş gəldin!");
+        setIsSignIn(true);
     };
 
     return (
         <Formik
             initialValues={initialValues}
-            validationSchema={validationSchema}
+            // validationSchema={validationSchema}
             onSubmit={handleSubmit}
         >
             {({ getFieldProps }) => (
@@ -81,16 +84,6 @@ const SignUpComponent = () => {
                                 {...getFieldProps("username")}
                             />
                             <ErrorMessage name="username" component="div" className="text-red-500 text-sm mt-1" />
-                        </Stack>
-
-                        <Stack>
-                            <TextField
-                                label="Phone Number"
-                                variant="outlined"
-                                fullWidth
-                                {...getFieldProps("number")}
-                            />
-                            <ErrorMessage name="number" component="div" className="text-red-500 text-sm mt-1" />
                         </Stack>
 
                         <Stack>

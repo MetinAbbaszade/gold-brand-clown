@@ -3,10 +3,11 @@
 import { heroContainerVariants, MotionStack } from '@/components/_common/HeroSection';
 import { Box, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { Cormorant_Garamond } from 'next/font/google';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SignInComponent from '@/components/_common/SignInComponent';
 import SignUpComponent from '@/components/_common/SignUpComponent';
 import fetchUserById from '@/api/user';
+import { AuthContext } from '@/context/AuthContext';
 
 const cormonant = Cormorant_Garamond({
     subsets: ['latin'],
@@ -17,11 +18,8 @@ const cormonant = Cormorant_Garamond({
 const GOLD = '#d4af37';
 
 const AuthPage = () => {
-    const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
-    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-        setIsSignIn(newValue === 0);
-    };
+    const { isSignIn, handleChange } = useContext(AuthContext)
 
     return (
         <MotionStack

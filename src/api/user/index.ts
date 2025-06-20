@@ -1,3 +1,4 @@
+import { LoginFormValues } from "@/components/_common/SignUpComponent";
 
 export interface User {
     id: number;
@@ -14,20 +15,44 @@ interface LoginCredentials {
 
 interface SuccessResponse {
     data: User;
-    status_code: 200;
+    status_code: 200 | 201;
 }
 
-interface ErrorResponse {
+export interface ErrorResponse {
     msg: string;
     status_code: number;
 }
 
 export type FetchUserResponse = SuccessResponse | ErrorResponse;
+const URL = 'http://localhost:4000'
+
+const fetchAllUser = async () => {
+    try {
+        const res = await fetch(`${URL}/users`);
+        const users: User[] = await res.json();
+        if (!users) {
+            return {
+                msg: 'User not found or incorrect password',
+                status_code: 404
+            };
+        }
+
+        return {
+            data: users,
+            status_code: 200
+        };
+    } catch (error) {
+        return {
+            msg: 'Fetch error: ' + (error as Error).message,
+            status_code: 500
+        };
+    }
+}
 
 
 const fetchUserByEmail = async ({ username, password }: LoginCredentials): Promise<FetchUserResponse> => {
     try {
-        const res = await fetch('http://localhost:4000/users');
+        const res = await fetch(`${URL}/users`);
         const users: User[] = await res.json();
 
         const user = users.find((user) => {
@@ -55,7 +80,7 @@ const fetchUserByEmail = async ({ username, password }: LoginCredentials): Promi
 
 export const fetchUserById = async (id: number | string) => {
     try {
-        const res = await fetch('http://localhost:4000/users');
+        const res = await fetch(`${URL}/users`);
         const users: User[] = await res.json();
 
         const user = users.find((user) => {
@@ -79,6 +104,37 @@ export const fetchUserById = async (id: number | string) => {
         };
     }
 }
+export const postUser = async (data: LoginFormValues): Promise<FetchUserResponse> => {
+    try {
+        const users = await fetchAllUser();
+        const length = users.data?.length ?? 0;
+
+        const dataToSend = { id: length + 1, ...data };
+
+        const res = await fetch(`${URL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(dataToSend)
+        });
+
+        if (!res.ok) {
+            throw new Error("Failed to create user");
+        }
+        const createdUser: User = await res.json();
+        return {
+            data: createdUser,
+            status_code: 201
+        };
+    } catch (error) {
+        return {
+            msg: "Unexpected Error",
+            status_code: 500
+        };
+    }
+};
+
 
 
 export default fetchUserByEmail
