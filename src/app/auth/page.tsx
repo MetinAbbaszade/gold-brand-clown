@@ -2,9 +2,9 @@ import AuthPage from "@/components/allPages/AuthPage"
 import { Stack } from "@mui/material"
 import { Metadata } from "next"
 
-// export const metadata: Metadata = {
-//     title: 'Welcome Boy!'
-// }
+export const metadata: Metadata = {
+    title: 'Welcome Boy!'
+}
 
 const page = () => {
     return (
