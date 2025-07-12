@@ -1,1 +1,44 @@
 @import "tailwindcss";
+
+:root {
+    --color-gold-primary: #d4af37;
+    --color-gold-light: #f2e6c2;
+    --color-gold-dark: #9e7c0c;
+    --color-black: #1a1a1a;
+    --color-gray-light: #f5f5f5;
+    --color-gray: #e0e0e0;
+    --color-gray-dark: #666666;
+
+    --font-primary: 'Playfair Display', serif;
+    --font-secondary: 'Raleway', sans-serif;
+
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-round: 50%;
+
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+
+    --shadow-small: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --shadow-large: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+
+.profile__card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(to right, var(--color-gold-dark), var(--color-gold-primary), var(--color-gold-light));
+}
