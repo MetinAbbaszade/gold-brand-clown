@@ -1,5 +1,5 @@
 import { raleway } from '@/providers/ThemeRegistry'
-import { Box, Button, Stack, TextField, Typography } from '@mui/material'
+import { Box, Button, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
@@ -38,15 +38,31 @@ const ProfileTab = () => {
                         {label}
                     </Typography>
                     <Stack position={'relative'} border='none' sx={{ cursor: 'not-allowed' }}>
-                        <TextField
-                            disabled={!isDisabled.includes(label)}
-                            required
-                            id="outlined-required"
-                            placeholder="Required"
-                            sx={{
-                                bgcolor: !isDisabled.includes(label) ? '#f6f6f6' : '#fff',
-                            }}
-                        />
+                        {label === 'Adress' ? (
+                            <TextareaAutosize
+                                aria-label="minimum height"
+                                minRows={3}
+                                placeholder="Required"
+                                style={{
+                                    width: '100%',
+                                    backgroundColor: !isDisabled.includes(label) ? '#f6f6f6' : '#fff',
+                                    padding: '10px',
+                                    border: '1px solid rgba(118, 118, 118, 0.3)',
+                                    borderRadius: '5px'
+                                }}
+                            />
+                        ) : (
+                            <TextField
+                                disabled={!isDisabled.includes(label)}
+                                required
+                                id="outlined-required"
+                                placeholder="Required"
+                                sx={{
+                                    bgcolor: !isDisabled.includes(label) ? '#f6f6f6' : '#fff',
+                                }}
+                            />
+                        )}
+
                         <Button sx={{
                             position: 'absolute',
                             right: '0px',

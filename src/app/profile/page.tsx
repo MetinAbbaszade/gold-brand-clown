@@ -13,12 +13,11 @@ const page = () => {
       variants={heroContainerVariants}
       initial='hidden'
       animate='visible'
-      height="100vh"
       width={'100vw'}
       display="flex"
       alignItems="center"
       justifyContent="center"
-      mt={10}
+      mt={15}
     >
       <ProfilePageComponent />
     </MotionStack>
