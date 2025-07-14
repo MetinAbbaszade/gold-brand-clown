@@ -1,6 +1,6 @@
-import { heroContainerVariants, MotionStack } from "@/components/_common/HeroSection";
+import { heroContainerVariants } from "@/components/_common/HeroSection";
+import { MotionStack } from '@/components/_common/HeroSection'
 import ProfilePageComponent from "@/components/allPages/ProfilePageComponent";
-import { Stack } from "@mui/material";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

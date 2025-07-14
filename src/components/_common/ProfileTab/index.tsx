@@ -58,6 +58,18 @@ const ProfileTab = () => {
                                 id="outlined-required"
                                 placeholder="Required"
                                 sx={{
+                                    '& .MuiOutlinedInput-root': {
+                                        borderRadius: '4px',
+                                        transition: '0.2s ease',
+                                        '& fieldset': { borderColor: '#e0e0e0' },
+                                        '&:hover fieldset': { borderColor: '#e0e0e0' },
+                                        '&.Mui-focused fieldset': {
+                                            borderColor: '#d4af37',
+                                            boxShadow: '0 0 0 2px rgba(212, 175, 55, 0.2)',
+                                        },
+                                    },
+                                    fontFamily: raleway.style.fontFamily,
+                                    fontSize: '1rem',
                                     bgcolor: !isDisabled.includes(label) ? '#f6f6f6' : '#fff',
                                 }}
                             />

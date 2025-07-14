@@ -11,7 +11,7 @@ import { useState } from "react"
 
 const ProfilePageComponent = () => {
 
-    const [activeTab, setActiveTab] = useState<'Profile' | 'Orders' | 'Wishlist' | 'Settings'>('Settings');
+    const [activeTab, setActiveTab] = useState<'Profile' | 'Orders' | 'Wishlist' | 'Settings'>('Profile');
 
     const tabPanels: Record<typeof activeTab, React.ReactNode> = Object.create(Object.prototype, {
         Profile: {

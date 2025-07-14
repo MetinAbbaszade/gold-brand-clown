@@ -186,7 +186,7 @@ export default function SettingsTab({
                                 sx={{
                                     display: 'block',
                                     fontSize: '0.9rem',
-                                    mb: 'var(--spacing-xs)',
+                                    mb: '0.5rem',
                                     color: '#666',
                                     fontWeight: 500,
                                 }}
@@ -200,7 +200,7 @@ export default function SettingsTab({
                                 variant="outlined"
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
-                                        borderRadius: 'var(--radius-sm)',
+                                        borderRadius: '4px',
                                         transition: '0.2s ease',
                                         '& fieldset': { borderColor: '#e0e0e0' },
                                         '&:hover fieldset': { borderColor: '#e0e0e0' },
