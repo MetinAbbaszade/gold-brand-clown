@@ -1,4 +1,3 @@
-import fetchDelay from "@/api/delay";
 import { heroContainerVariants } from "@/components/_common/HeroSection";
 import { MotionStack } from '@/components/_common/HeroSection'
 import ProfilePageComponent from "@/components/allPages/ProfilePageComponent";

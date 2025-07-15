@@ -1,12 +1,32 @@
 import { LoginFormValues } from "@/components/_common/SignUpComponent";
 import fetchDelay from "../delay";
 
+export interface OrderItem {
+    id: string;
+    order_date: string;
+    status: "Delivered" | "Pending" | "Shipped" | "Cancelled";
+    img: string;
+    name: string;
+    description: string;
+    price: number;
+}
+
+export interface WishlistItem {
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    img: string;
+}
+
 export interface User {
     id: number;
     email: string;
     username: string;
     password: string;
     address: string;
+    order: OrderItem[];
+    wishlist: WishlistItem[];
 }
 
 interface LoginCredentials {
