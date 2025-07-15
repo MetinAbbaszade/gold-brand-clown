@@ -10,7 +10,7 @@ const LoadingContainer = styled(Box)({
     alignItems: 'center',
     minHeight: '100vh',
     minWidth: '100vw',
-    backgroundColor: 'rgba(0, 0, 0, 0.85)',
+    background: '#fff',
     color: '#B8860B',
 });
 

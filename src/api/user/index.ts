@@ -1,4 +1,5 @@
 import { LoginFormValues } from "@/components/_common/SignUpComponent";
+import fetchDelay from "../delay";
 
 export interface User {
     id: number;
@@ -28,6 +29,7 @@ const URL = 'http://localhost:4000'
 
 const fetchAllUser = async () => {
     try {
+        await fetchDelay()
         const res = await fetch(`${URL}/users`);
         const users: User[] = await res.json();
         if (!users) {
@@ -52,6 +54,7 @@ const fetchAllUser = async () => {
 
 const fetchUserByEmail = async ({ username, password }: LoginCredentials): Promise<FetchUserResponse> => {
     try {
+        await fetchDelay()
         const res = await fetch(`${URL}/users`);
         const users: User[] = await res.json();
 
@@ -80,6 +83,7 @@ const fetchUserByEmail = async ({ username, password }: LoginCredentials): Promi
 
 export const fetchUserById = async (id: number | string) => {
     try {
+        await fetchDelay()
         const res = await fetch(`${URL}/users`);
         const users: User[] = await res.json();
 
@@ -106,6 +110,7 @@ export const fetchUserById = async (id: number | string) => {
 }
 export const postUser = async (data: LoginFormValues): Promise<FetchUserResponse> => {
     try {
+        await fetchDelay()
         const users = await fetchAllUser();
         const length = users.data?.length ?? 0;
 

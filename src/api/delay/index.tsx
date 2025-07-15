@@ -1,6 +1,6 @@
 export default async function fetchDelay() {
     // Simulate a network delay
-    await new Promise(resolve => setTimeout(resolve, 10000)); // Delay for 2 seconds
+    await new Promise(resolve => setTimeout(resolve, 1000)); // Delay for 2 seconds
 
     // --- Your actual data fetching logic would go here ---
     // const res = await fetch('your-api-endpoint');
