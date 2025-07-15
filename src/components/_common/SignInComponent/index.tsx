@@ -45,7 +45,6 @@ const SignInComponent = () => {
     const handleSubmit = async (values: LoginFormValues) => {
         setAuthError(null);
         const result: FetchUserResponse = await fetchUserByEmail(values);
-
         if ("msg" in result) {
             setAuthError(result.msg);
         } else {

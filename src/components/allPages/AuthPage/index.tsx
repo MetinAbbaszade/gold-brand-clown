@@ -3,10 +3,9 @@
 import { heroContainerVariants, MotionStack } from '@/components/_common/HeroSection';
 import { Box, Divider, Stack, Tab, Tabs, Typography } from '@mui/material';
 import { Cormorant_Garamond } from 'next/font/google';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import SignInComponent from '@/components/_common/SignInComponent';
 import SignUpComponent from '@/components/_common/SignUpComponent';
-import fetchUserById from '@/api/user';
 import { AuthContext } from '@/context/AuthContext';
 
 const cormonant = Cormorant_Garamond({

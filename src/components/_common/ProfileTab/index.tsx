@@ -1,15 +1,15 @@
+"use client";
+
 import { raleway } from '@/providers/ThemeRegistry'
-import { Box, Button, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
+import { Button, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import { AuthContext } from '@/context/AuthContext';
 
 const ProfileTab = () => {
-
     const [isDisabled, setIsDisabled] = useState<Array<string>>([])
-
-    const { logOutFunction } = useContext(AuthContext)
+    const { logOutFunction, auth } = useContext(AuthContext)
 
     const handleClick = (label: string) => {
         setIsDisabled(prev => {
@@ -19,14 +19,13 @@ const ProfileTab = () => {
                 return [...prev, label];
             }
         });
-
     }
 
     return (
         <Stack
             spacing={3}
         >
-            {['Full Name', 'Email', 'Adress'].map((label) => (
+            {['username', 'email', 'address'].map((label) => (
                 <Stack key={label}>
                     <Typography
                         fontSize={'0.9rem'}
@@ -38,11 +37,12 @@ const ProfileTab = () => {
                         {label}
                     </Typography>
                     <Stack position={'relative'} border='none' sx={{ cursor: 'not-allowed' }}>
-                        {label === 'Adress' ? (
+                        {label === 'address' ? (
                             <TextareaAutosize
+                                disabled={!isDisabled.includes(label)}
                                 aria-label="minimum height"
                                 minRows={3}
-                                placeholder="Required"
+                                placeholder={auth.userData?.address}
                                 style={{
                                     width: '100%',
                                     backgroundColor: !isDisabled.includes(label) ? '#f6f6f6' : '#fff',
@@ -56,13 +56,18 @@ const ProfileTab = () => {
                                 disabled={!isDisabled.includes(label)}
                                 required
                                 id="outlined-required"
-                                placeholder="Required"
+                                placeholder={
+                                    label === 'username'
+                                        ? auth.userData?.username ?? ''
+                                        : label === 'email'
+                                            ? auth.userData?.email ?? ''
+                                            : ''
+                                }
                                 sx={{
                                     '& .MuiOutlinedInput-root': {
                                         borderRadius: '4px',
                                         transition: '0.2s ease',
-                                        '& fieldset': { borderColor: '#e0e0e0' },
-                                        '&:hover fieldset': { borderColor: '#e0e0e0' },
+                                        borderColor: '#e0e0e0',
                                         '&.Mui-focused fieldset': {
                                             borderColor: '#d4af37',
                                             boxShadow: '0 0 0 2px rgba(212, 175, 55, 0.2)',

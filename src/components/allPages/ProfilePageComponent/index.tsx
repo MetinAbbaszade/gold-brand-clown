@@ -1,17 +1,26 @@
 'use client'
 
-import { MotionStack } from "@/components/_common/HeroSection"
 import OrdersTab from "@/components/_common/OrdersTab"
 import ProfileTab from "@/components/_common/ProfileTab"
 import SettingsTab from "@/components/_common/SettingsTab"
 import WishlistTab from "@/components/_common/WishlistTab"
+import { AuthContext } from "@/context/AuthContext"
 import { playfair_display, raleway } from "@/providers/ThemeRegistry"
 import { Box, Button, Stack, Typography } from "@mui/material"
-import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useContext, useEffect, useState } from "react"
 
 const ProfilePageComponent = () => {
 
     const [activeTab, setActiveTab] = useState<'Profile' | 'Orders' | 'Wishlist' | 'Settings'>('Profile');
+    const router = useRouter();
+    const { auth } = useContext(AuthContext)
+
+    useEffect(() => {
+        if(!auth.token){
+            router.push('auth')
+        }
+    }, [])
 
     const tabPanels: Record<typeof activeTab, React.ReactNode> = Object.create(Object.prototype, {
         Profile: {

@@ -8,20 +8,19 @@ export const metadata: Metadata = {
 }
 
 const page = () => {
-  return (
-    <MotionStack
-      variants={heroContainerVariants}
-      initial='hidden'
-      animate='visible'
-      width={'100vw'}
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      mt={15}
-    >
-      <ProfilePageComponent />
-    </MotionStack>
-  );
+  return <MotionStack
+    variants={heroContainerVariants}
+    initial='hidden'
+    animate='visible'
+    width={'100vw'}
+    display="flex"
+    alignItems="center"
+    justifyContent="center"
+    mt={15}
+  >
+    <ProfilePageComponent />
+  </MotionStack>
+    ;
 }
 
 export default page;
