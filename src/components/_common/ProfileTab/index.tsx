@@ -1,11 +1,13 @@
 "use client";
 
 import { raleway } from '@/providers/ThemeRegistry'
-import { Button, Stack, TextareaAutosize, TextField, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Stack, styled, TextareaAutosize, TextField, Typography } from '@mui/material'
 import React, { useContext, useState } from 'react'
 import EditIcon from '@mui/icons-material/Edit';
 import DoneIcon from '@mui/icons-material/Done';
 import { AuthContext } from '@/context/AuthContext';
+
+
 
 const ProfileTab = () => {
     const [isDisabled, setIsDisabled] = useState<Array<string>>([])
@@ -25,7 +27,16 @@ const ProfileTab = () => {
         <Stack
             spacing={3}
         >
-            {['username', 'email', 'address'].map((label) => (
+            {[{
+                label: 'Username',
+                data: 'username'
+            }, {
+                label: 'Email',
+                data: 'email'
+            }, {
+                label: 'Address',
+                data: 'address'
+            }].map(({ label, data }) => (
                 <Stack key={label}>
                     <Typography
                         fontSize={'0.9rem'}
@@ -37,7 +48,7 @@ const ProfileTab = () => {
                         {label}
                     </Typography>
                     <Stack position={'relative'} border='none' sx={{ cursor: 'not-allowed' }}>
-                        {label === 'address' ? (
+                        {data === 'address' ? (
                             <TextareaAutosize
                                 disabled={!isDisabled.includes(label)}
                                 aria-label="minimum height"
@@ -57,9 +68,9 @@ const ProfileTab = () => {
                                 required
                                 id="outlined-required"
                                 placeholder={
-                                    label === 'username'
+                                    data === 'username'
                                         ? auth.userData?.username ?? ''
-                                        : label === 'email'
+                                        : data === 'email'
                                             ? auth.userData?.email ?? ''
                                             : ''
                                 }

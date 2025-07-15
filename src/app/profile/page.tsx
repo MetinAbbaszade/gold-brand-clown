@@ -1,3 +1,4 @@
+import fetchDelay from "@/api/delay";
 import { heroContainerVariants } from "@/components/_common/HeroSection";
 import { MotionStack } from '@/components/_common/HeroSection'
 import ProfilePageComponent from "@/components/allPages/ProfilePageComponent";
@@ -7,7 +8,8 @@ export const metadata: Metadata = {
   title: 'Profile'
 }
 
-const page = () => {
+const page = async () => {
+  const data = await fetchDelay();
   return <MotionStack
     variants={heroContainerVariants}
     initial='hidden'
@@ -20,7 +22,6 @@ const page = () => {
   >
     <ProfilePageComponent />
   </MotionStack>
-    ;
 }
 
 export default page;

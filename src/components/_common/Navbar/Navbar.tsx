@@ -11,7 +11,7 @@ import ShoppingBagIcon from '@mui/icons-material/ShoppingBag';
 import Link from "next/link"
 import { Playfair_Display } from "next/font/google";
 import React, { useContext } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Button, Divider } from "@mui/material";
 import { AuthContext } from "@/context/AuthContext";
 
@@ -42,6 +42,7 @@ const navItems: Array<INavItems> = [
 
 const Navbar = () => {
     const pathname = usePathname()
+    const router = useRouter()
     const { auth, logOutFunction } = useContext(AuthContext)
     return (
         <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
@@ -91,9 +92,11 @@ const Navbar = () => {
                         <IconButton color="inherit" aria-label="search">
                             <SearchIcon />
                         </IconButton>
-                        <IconButton component={Link} href={auth.userData ? "/profile" : "/auth"} color="inherit">
-                            <PersonOutlineIcon />
-                        </IconButton>
+                        {
+                            auth.token && <IconButton component={Link} href={auth.userData ? "/profile" : "/auth"} color="inherit">
+                                <PersonOutlineIcon />
+                            </IconButton>
+                        }
                         {
                             auth.userData &&
                             (
@@ -105,17 +108,26 @@ const Navbar = () => {
                     </Stack>
                     <Stack>
                         {
-                            auth.userData &&
-                            (
-                                <Button
-                                    variant="contained"
-                                    type="submit"
-                                    sx={{ bgcolor: '#d4af38', border: 'none' }}
-                                    onClick={logOutFunction}
-                                >
-                                    LogOut
-                                </Button>
-                            )
+                            auth.userData ?
+                                (
+                                    <Button
+                                        variant="contained"
+                                        type="submit"
+                                        sx={{ bgcolor: '#d4af38', border: 'none' }}
+                                        onClick={logOutFunction}
+                                    >
+                                        LogOut
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        variant="contained"
+                                        type="submit"
+                                        sx={{ bgcolor: '#d4af38', border: 'none' }}
+                                        onClick={() => router.push('/auth')}
+                                    >
+                                        Login
+                                    </Button>
+                                )
                         }
                     </Stack>
                 </Stack>
