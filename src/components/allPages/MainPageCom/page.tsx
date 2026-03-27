@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { Stack, Box } from "@mui/material";
 import HeroSection from '../../_common/HeroSection';
 import MainCollectionSection from "@/components/_common/MainCollectionSection";
 import { Montserrat, Playfair_Display } from "next/font/google";
@@ -20,45 +20,37 @@ export const playfair = Playfair_Display({
 
 
 const MainPageCom = async () => {
-    const collectionData = await getAllCollection()
-    const testimonialsData = await getAllTestimonials()
+   const [collectionData, testimonialsData] = await Promise.all([
+        getAllCollection(),
+        getAllTestimonials()
+    ]);
     return (
-        <Stack
-            component={'main'}
-        >
-            <Stack m={'50px 0'}>
+        <Stack component="main">
+            <Box my="50px">
                 <HeroSection playfair={playfair} />
-            </Stack>
+            </Box>
             <Stack
-                minWidth={'80%'}
-                alignItems={'center'}
-                justifyContent={'center'}
-                m={'0 auto'}
-                p={'50px 0'}
+                sx={{
+                    minWidth: '80%',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    mx: 'auto',
+                    py: '50px',
+                }}
             >
                 <MainCollectionSection playfair={playfair} collectionData={collectionData} />
             </Stack>
-            <Stack
-                m={'40px 0'}
-            >
+            <Box my="40px">
                 <MainAboutSection playfair={playfair} />
-            </Stack>
-            <Stack
-                m={'50px 0'}
-            >
+            </Box>
+            <Box my="50px">
                 <MainTestimonials playfair={playfair} testimonialsData={testimonialsData} />
-            </Stack>
-            <Stack
-                m={'50px 0 0'}
-            >
+            </Box>
+            <Box mt="50px">
                 <SubscribeSection playfair={playfair} />
-            </Stack>
-            <Stack>
-                <MainFooter playfair={playfair} />
-            </Stack>
-            <Stack>
-                <Footer />
-            </Stack>
+            </Box>
+            <MainFooter playfair={playfair} />
+            <Footer />
         </Stack>
     );
 }
