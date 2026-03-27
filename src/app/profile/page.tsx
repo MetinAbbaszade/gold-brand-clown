@@ -17,7 +17,7 @@ const page = async () => {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      mt={15}
+      mt={5}
     >
       <ProfilePageComponent />
     </MotionStack>

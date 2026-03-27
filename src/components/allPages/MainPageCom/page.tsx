@@ -26,7 +26,7 @@ const MainPageCom = async () => {
         <Stack
             component={'main'}
         >
-            <Stack m={'50px 0'}>
+            <Stack m={'0 0 50px'}>
                 <HeroSection playfair={playfair} />
             </Stack>
             <Stack

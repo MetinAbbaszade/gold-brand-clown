@@ -26,7 +26,7 @@ export default function LayoutWrapper({
                                 <Navbar />
                             </Stack>
                         }
-                        <Stack component={'main'} position={!isAuth ? 'absolute' : 'static'}>
+                        <Stack component={'main'} position={!isAuth ? 'absolute' : 'static'} sx={{ paddingTop: '80px', flexGrow: 1 }}>
                             {children}
                         </Stack>
                     </ThemeRegistry>

@@ -45,7 +45,14 @@ const Navbar = () => {
     const router = useRouter()
     const { auth, logOutFunction } = useContext(AuthContext)
     return (
-        <AppBar position="fixed" sx={{ bgcolor: 'background.paper', color: 'text.primary', minHeight: '80px', justifyContent: 'center' }}>
+        <AppBar position="fixed" sx={{
+            bgcolor: 'background.paper',
+            color: 'text.primary',
+            minHeight: '80px',
+            justifyContent: 'center',
+            width: '100%',
+            zIndex: (theme) => theme.zIndex.appBar, // Ensures it's above other content
+        }}>
             <Toolbar sx={{ justifyContent: 'space-around' }}>
 
                 {/* Left Side */}
