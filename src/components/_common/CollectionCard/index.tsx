@@ -23,22 +23,30 @@ const CollectionCard: React.FC<IProp> = ({ data: { name, description, image }, p
                 transition: 'transform 0.25s ease'
             }}
         >
+
+
+
             <Stack
-                position={'relative'}
-                height={'300px'}
+                position='relative'
+                height='300px'
+                sx={{
+                    '&:hover .button': {
+                        opacity: 1,
+                        visibility: 'visible',
+                    }
+                }}
             >
                 <Stack
-                    width={'100%'}
-                    height={'100%'}
-                    position={'absolute'}
-                    top={0}
-                    left={0}
-                    alignItems={'center'}
-                    justifyContent={'center'}
-                    display={'none'}
-                    className={"button"}
+                    className='button'
+                    position='absolute'
+                    width='100%'
+                    height='100%'
+                    alignItems='center'
+                    justifyContent='center'
                     sx={{
-                        transition: 'display 2s ease'
+                        opacity: 0,
+                        visibility: 'hidden',
+                        transition: 'opacity 0.3s ease, visibility 0.3s ease',
                     }}
                 >
                     <Button
