@@ -20,10 +20,7 @@ interface LoginFormValues {
 	password: string;
 }
 
-const initialValues: LoginFormValues = {
-	username: "",
-	password: "",
-};
+const initialValues: LoginFormValues = { username: "", password: "" };
 
 const validationSchema = Yup.object({
 	username: Yup.string().required("Username is required"),
@@ -31,17 +28,8 @@ const validationSchema = Yup.object({
 });
 
 const typographyVariant = {
-	hidden: {
-		opacity: 0,
-		y: -20,
-	},
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 1,
-		},
-	},
+	hidden: { opacity: 0, y: -20 },
+	visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
 const MotionTypography = motion(Typography);
@@ -49,10 +37,10 @@ const MotionTypography = motion(Typography);
 const SignInComponent = () => {
 	const { loginFunction } = useContext(AuthContext);
 	const [authError, setAuthError] = useState<string | null>(null);
+
 	const handleSubmit = async (values: LoginFormValues) => {
 		setAuthError(null);
 		const result: FetchUserResponse = await fetchUserByEmail(values);
-		console.log(result);
 		if ("msg" in result) {
 			setAuthError(result.msg);
 		} else {
@@ -68,8 +56,7 @@ const SignInComponent = () => {
 		>
 			{({ handleChange, handleBlur, values }) => (
 				<Form>
-					<Stack spacing={4}>
-						{/* Error message on top */}
+					<Stack spacing={3}>
 						{authError && (
 							<MotionTypography
 								variants={typographyVariant}
@@ -89,6 +76,7 @@ const SignInComponent = () => {
 								type="text"
 								placeholder="Username"
 								fullWidth
+								size="small"
 								value={values.username}
 								onChange={(e) => {
 									setAuthError(null);
@@ -110,6 +98,7 @@ const SignInComponent = () => {
 								type="password"
 								placeholder="Enter your password"
 								fullWidth
+								size="small"
 								value={values.password}
 								onChange={(e) => {
 									setAuthError(null);
@@ -125,18 +114,39 @@ const SignInComponent = () => {
 						</Stack>
 
 						<Stack
-							flexDirection="row"
-							alignItems="center"
-							justifyContent="space-between"
+							sx={{
+								flexDirection: { xs: "column", sm: "row" },
+								alignItems: { sm: "center" },
+								justifyContent: { sm: "space-between" },
+								gap: { xs: 0.5, sm: 0 },
+							}}
 						>
-							<FormControlLabel control={<Checkbox />} label="Remember me" />
-							<Typography color="#d4af38">Forgot password?</Typography>
+							<FormControlLabel
+								control={<Checkbox size="small" />}
+								label="Remember me"
+							/>
+							<Typography
+								variant="body2"
+								color="#d4af38"
+								sx={{ cursor: "pointer" }}
+							>
+								Forgot password?
+							</Typography>
 						</Stack>
 
 						<Button
 							variant="contained"
 							type="submit"
-							sx={{ bgcolor: "#d4af38", border: "none" }}
+							fullWidth
+							sx={{
+								bgcolor: "#d4af38",
+								border: "none",
+								py: 1.25,
+								textTransform: "uppercase",
+								letterSpacing: "0.1em",
+								fontSize: "13px",
+								"&:hover": { bgcolor: "#b8960b" },
+							}}
 						>
 							Login
 						</Button>
