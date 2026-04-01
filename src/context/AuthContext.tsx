@@ -1,91 +1,103 @@
 "use client";
 
-import { fetchUserById, User } from "@/api/user";
 import { useRouter } from "next/navigation";
 import { createContext, useCallback, useEffect, useState } from "react";
+import { fetchUserById, type User } from "@/api/user";
 
 interface IAuthContext {
-    userData: User | undefined;
-    token: string;
+	userData: User | undefined;
+	token: string;
 }
 
 interface IProps {
-    children: React.ReactNode;
+	children: React.ReactNode;
 }
 
 interface IAuthProvider {
-    loading: boolean;
-    auth: IAuthContext;
-    loginFunction: (data: User) => void;
-    isSignIn: boolean;
-    setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
-    handleChange: (_event: React.SyntheticEvent, newValue: number) => void
-    logOutFunction: () => void
+	loading: boolean;
+	auth: IAuthContext;
+	loginFunction: (data: User) => void;
+	isSignIn: boolean;
+	setIsSignIn: React.Dispatch<React.SetStateAction<boolean>>;
+	handleChange: (_event: React.SyntheticEvent, newValue: number) => void;
+	logOutFunction: () => void;
 }
 
 export const AuthContext = createContext({} as IAuthProvider);
 
 const AuthContextProvider: React.FC<IProps> = ({ children }) => {
+	const router = useRouter();
+	const [auth, setAuth] = useState<IAuthContext>({
+		userData: undefined,
+		token: "",
+	});
+	const [loading, setLoading] = useState(true);
+	const [isSignIn, setIsSignIn] = useState<boolean>(true);
 
-    const router = useRouter()
-    const [auth, setAuth] = useState<IAuthContext>({
-        userData: undefined,
-        token: '',
-    });
-    const [loading, setLoading] = useState(true);
-    const [isSignIn, setIsSignIn] = useState<boolean>(true);
+	const loginFunction = useCallback(
+		(user: User) => {
+			const token = `${user.id}:${user.username}`;
+			localStorage.setItem("token", token);
+			setAuth({ userData: user, token });
+			setLoading(false);
+			router.push("/");
+		},
+		[router.push],
+	);
 
-    const loginFunction = useCallback((user: User) => {
-        const token = `${user.id}:${user.username}`;
-        localStorage.setItem("token", token);
-        setAuth({ userData: user, token });
-        setLoading(false);
-        router.push('/')
-    }, []);
+	const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
+		setIsSignIn(newValue === 0);
+	};
 
-    const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
-        setIsSignIn(newValue === 0);
-    };
+	const logOutFunction = () => {
+		setAuth({
+			userData: undefined,
+			token: "",
+		});
+		localStorage.removeItem("token");
+		router.push("/auth");
+	};
 
-    const logOutFunction = () => {
-        setAuth({
-            userData: undefined,
-            token: '',
-        })
-        localStorage.removeItem('token')
-        router.push('/auth')
-    }
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (!token) {
+			setLoading(false);
+			return;
+		}
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            setLoading(false);
-            return;
-        }
+		const [id] = token.slice(0, 1);
 
-        const [id] = token.slice(0, 1);
+		const fetchData = async () => {
+			try {
+				const res = await fetchUserById(id);
+				setAuth({ userData: res.data, token });
+			} catch (err) {
+				console.error("Auth fetch failed:", err);
+				localStorage.removeItem("token");
+				setAuth({ userData: undefined, token: "" });
+			} finally {
+				setLoading(false);
+			}
+		};
 
-        const fetchData = async () => {
-            try {
-                const res = await fetchUserById(id);
-                setAuth({ userData: res.data, token });
-            } catch (err) {
-                console.error("Auth fetch failed:", err);
-                localStorage.removeItem("token");
-                setAuth({ userData: undefined, token: '' });
-            } finally {
-                setLoading(false);
-            }
-        };
+		fetchData();
+	}, []);
 
-        fetchData();
-    }, []);
-
-    return (
-        <AuthContext.Provider value={{ auth, loading, loginFunction, isSignIn, handleChange, setIsSignIn, logOutFunction }}>
-            {children}
-        </AuthContext.Provider>
-    );
+	return (
+		<AuthContext.Provider
+			value={{
+				auth,
+				loading,
+				loginFunction,
+				isSignIn,
+				handleChange,
+				setIsSignIn,
+				logOutFunction,
+			}}
+		>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 export default AuthContextProvider;

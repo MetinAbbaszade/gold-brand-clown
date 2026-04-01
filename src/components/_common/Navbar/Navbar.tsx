@@ -1,7 +1,6 @@
 "use client";
 
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import { Button, Divider } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -107,11 +106,6 @@ const Navbar = () => {
 								color="inherit"
 							>
 								<PersonOutlineIcon />
-							</IconButton>
-						)}
-						{auth.userData && (
-							<IconButton component={Link} href="/cart" color="inherit">
-								<ShoppingBagIcon />
 							</IconButton>
 						)}
 					</Stack>

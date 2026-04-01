@@ -24,7 +24,7 @@ const WishlistTab = () => {
             >
                 My Wishlist
             </Typography>
-            {auth.userData?.wishlist.length ?
+            {auth.userData?.wishlist?.length ?
                 <Grid
                     container
                     spacing={2}
