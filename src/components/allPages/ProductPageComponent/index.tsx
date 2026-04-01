@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import CollectionFooter from "@/components/_common/CollectionFooter";
 import {
 	heroContainerVariants,
 	MotionStack,
@@ -363,6 +364,7 @@ const ProductPageComponent = ({
 					})}
 				</Stack>
 			</Stack>
+			<CollectionFooter />
 		</MotionStack>
 	);
 };
