@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import {
 	Box,
 	FormControl,
+	Grid,
 	InputLabel,
 	MenuItem,
 	Select,
@@ -112,7 +113,6 @@ const getAriaValueText = (value: number) =>
 	`Price is ${formatPriceValue(value)}`;
 
 const LABEL_ID = "collection-filter-label";
-
 const minPriceInitial = 100;
 const maxPriceInitial = 10000;
 const minGlobal = 100;
@@ -153,19 +153,23 @@ const ProductPageComponent = ({
 			variants={heroContainerVariants}
 			initial="hidden"
 			animate="visible"
-			width="100vw"
+			sx={{ width: "100%", overflowX: "hidden" }}
 		>
+			{/* Hero Banner */}
 			<Stack
 				bgcolor="#f5f5f5"
-				height="250px"
+				sx={{
+					minHeight: { xs: "180px", sm: "220px", md: "250px" },
+					px: { xs: 2, sm: 4 },
+				}}
 				alignItems="center"
 				justifyContent="center"
 			>
-				<Stack textAlign="center" spacing={5}>
+				<Stack textAlign="center" spacing={{ xs: 2, md: 5 }}>
 					<Typography
-						fontSize="48px"
 						fontWeight={100}
 						fontFamily={playfair.style.fontFamily}
+						sx={{ fontSize: { xs: "28px", sm: "36px", md: "48px" } }}
 					>
 						Jewelry Products
 					</Typography>
@@ -175,30 +179,50 @@ const ProductPageComponent = ({
 					</Typography>
 				</Stack>
 			</Stack>
-			<Stack m="4rem auto" width="65%">
+
+			{/* Filters + Products */}
+			<Stack
+				sx={{
+					mx: "auto",
+					width: { xs: "92%", sm: "88%", md: "75%", lg: "65%" },
+					my: { xs: "2rem", md: "4rem" },
+				}}
+			>
+				{/* Search bar */}
 				<Stack flexDirection="row" m="1rem 0">
 					<TextField
 						variant="outlined"
 						placeholder="Search jewelry..."
-						sx={{ ...TEXT_FIELD_SX, width: "50%" }}
+						sx={{ ...TEXT_FIELD_SX, flex: 1 }}
 					/>
 					<Stack
 						alignItems="center"
 						justifyContent="center"
-						width="50px"
+						sx={{ width: "50px", minWidth: "50px" }}
 						bgcolor="#d4af38"
 					>
 						<SearchIcon sx={{ color: "#fff" }} />
 					</Stack>
 				</Stack>
-				<Stack flexDirection="row" columnGap={5} alignItems="center">
+
+				{/* Filters row — stacks vertically on mobile */}
+				<Stack
+					sx={{
+						flexDirection: { xs: "column", sm: "row" },
+						columnGap: { sm: 3, md: 5 },
+						rowGap: 2,
+						alignItems: { sm: "center" },
+						my: { xs: "1rem", md: "2rem" },
+					}}
+				>
+					{/* Collection dropdown */}
 					<Box
 						sx={{
-							width: 250,
-							m: "2rem 0",
+							width: { xs: "100%", sm: "220px", md: "250px" },
 							border: "1px solid #e0e0e0",
 							borderRadius: "8px",
 							bgcolor: "background.paper",
+							flexShrink: 0,
 						}}
 					>
 						<FormControl fullWidth>
@@ -217,9 +241,12 @@ const ProductPageComponent = ({
 							</Select>
 						</FormControl>
 					</Box>
+
+					{/* Price range slider */}
 					<Box
 						sx={{
-							width: "80%",
+							flex: 1,
+							width: { xs: "100%", sm: "auto" },
 							p: 2,
 							border: "1px solid #e0e0e0",
 							borderRadius: "8px",
@@ -267,16 +294,17 @@ const ProductPageComponent = ({
 						</Stack>
 					</Box>
 				</Stack>
-				<Stack m="2rem 0" direction={"row"} flexWrap="wrap" gap={"2rem"}>
-					{productDatas.map((data) => {
-						return (
-							<Stack key={Math.random()}>
-								<ProductCard product={data} />
-							</Stack>
-						);
-					})}
-				</Stack>
+
+				{/* Product grid */}
+				<Grid container spacing={{ xs: 2, sm: 3 }} sx={{ my: "1rem" }}>
+					{productDatas.map((data) => (
+						<Grid key={data.id} size={{ xs: 12, sm: 6, lg: 4 }}>
+							<ProductCard product={data} />
+						</Grid>
+					))}
+				</Grid>
 			</Stack>
+
 			<CollectionFooter />
 		</MotionStack>
 	);

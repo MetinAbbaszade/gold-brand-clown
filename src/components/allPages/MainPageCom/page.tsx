@@ -1,4 +1,4 @@
-import { Stack, Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { Playfair_Display } from "next/font/google";
 import { getAllCollection } from "@/api/mainCollection";
 import { getAllTestimonials } from "@/api/testimonials";
@@ -20,18 +20,20 @@ const MainPageCom = async () => {
 		getAllCollection(),
 		getAllTestimonials(),
 	]);
+
 	return (
-		<Stack component="main">
-			<Box mb={"50px"}>
+		<Stack component="main" sx={{ overflowX: "hidden" }}>
+			<Box mb={{ xs: "24px", sm: "36px", md: "50px" }}>
 				<HeroSection playfair={playfair} />
 			</Box>
+
 			<Stack
 				sx={{
-					minWidth: "80%",
+					width: { xs: "92%", sm: "88%", md: "80%" }, // ✅ was minWidth: "80%" — breaks on small screens
 					alignItems: "center",
 					justifyContent: "center",
 					mx: "auto",
-					py: "50px",
+					py: { xs: "24px", sm: "36px", md: "50px" }, // ✅ responsive vertical padding
 				}}
 			>
 				<MainCollectionSection
@@ -39,18 +41,28 @@ const MainPageCom = async () => {
 					collectionData={collectionData}
 				/>
 			</Stack>
-			<Box my="40px">
+
+			<Box my={{ xs: "20px", sm: "30px", md: "40px" }}>
+				{" "}
+				{/* ✅ responsive margin */}
 				<MainAboutSection playfair={playfair} />
 			</Box>
-			<Box my="50px">
+
+			<Box my={{ xs: "24px", sm: "36px", md: "50px" }}>
+				{" "}
+				{/* ✅ responsive margin */}
 				<MainTestimonials
 					playfair={playfair}
 					testimonialsData={testimonialsData}
 				/>
 			</Box>
-			<Box mt="50px">
+
+			<Box mt={{ xs: "24px", sm: "36px", md: "50px" }}>
+				{" "}
+				{/* ✅ responsive margin */}
 				<SubscribeSection playfair={playfair} />
 			</Box>
+
 			<MainFooter playfair={playfair} />
 			<Footer />
 		</Stack>

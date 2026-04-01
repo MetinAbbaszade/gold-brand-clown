@@ -22,28 +22,8 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 
-export interface ProductDetails {
-	clarity: string;
-	color: string;
-	diamond: string;
-	metal: string;
-	weight: string;
-}
-
-export interface Product {
-	collection: string;
-	description: string;
-	details: ProductDetails;
-	id: string;
-	images: string[];
-	name: string;
-	price: number;
-	recentlyViewed: number[];
-	relatedProducts: number[];
-}
-
 export interface ProductDetailPageProps {
-	product: Product;
+	product: any;
 }
 
 const GOLD = "#D4AF37";
@@ -54,14 +34,16 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 	const [qty, setQty] = useState(1);
 
 	return (
-		<Grid container spacing={6}>
+		<Grid container spacing={{ xs: 3, md: 6 }}>
+			{/* Image column */}
 			<Grid size={{ xs: 12, md: 6 }}>
 				<Stack gap={2}>
+					{/* Main image */}
 					<Box
 						sx={{
 							position: "relative",
 							width: "100%",
-							height: "450px",
+							aspectRatio: { xs: "4/3", sm: "1/1" },
 							borderRadius: "4px",
 							overflow: "hidden",
 							bgcolor: "#f5f5f5",
@@ -72,17 +54,20 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							alt={product.name}
 							fill
 							style={{ objectFit: "cover" }}
+							sizes="(max-width: 900px) 100vw, 50vw"
 						/>
 					</Box>
-					<Stack flexDirection="row" gap={1.5}>
-						{product.images.map((img, i) => (
+
+					{/* Thumbnails */}
+					<Stack flexDirection="row" gap={1.5} flexWrap="wrap">
+						{product.images.map((img: string, i: number) => (
 							<Box
 								key={i}
 								onClick={() => setActiveImg(i)}
 								sx={{
 									position: "relative",
-									width: "90px",
-									height: "90px",
+									width: { xs: "60px", sm: "75px", md: "90px" },
+									height: { xs: "60px", sm: "75px", md: "90px" },
 									borderRadius: "4px",
 									overflow: "hidden",
 									cursor: "pointer",
@@ -96,6 +81,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 									alt={`${product.name} ${i + 1}`}
 									fill
 									style={{ objectFit: "cover" }}
+									sizes="90px"
 								/>
 							</Box>
 						))}
@@ -103,17 +89,18 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 				</Stack>
 			</Grid>
 
+			{/* Info column */}
 			<Grid size={{ xs: 12, md: 6 }}>
 				<Stack gap={2.5}>
 					{/* Collection badge */}
 					<Box
 						sx={{
 							display: "inline-block",
+							alignSelf: "flex-start",
 							bgcolor: "#fdf6e3",
 							border: `1px solid ${GOLD}`,
 							px: 2,
 							py: 0.5,
-							width: "100%",
 						}}
 					>
 						<Typography
@@ -127,15 +114,18 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 					</Box>
 
 					{/* Name */}
-					<Typography variant="h4" fontWeight={300}>
+					<Typography
+						fontWeight={300}
+						sx={{ fontSize: { xs: "1.5rem", md: "2.125rem" } }}
+					>
 						{product.name}
 					</Typography>
 
 					{/* Rating */}
 					<Stack flexDirection="row" alignItems="center" gap={1}>
 						<Stack flexDirection="row" color={GOLD}>
-							{[...Array(4)].map((_) => (
-								<StarIcon key={Math.random()} sx={{ fontSize: 20 }} />
+							{[...Array(4)].map((_, i) => (
+								<StarIcon key={i} sx={{ fontSize: 20 }} />
 							))}
 							<StarHalfIcon sx={{ fontSize: 20 }} />
 						</Stack>
@@ -165,7 +155,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							<IconButton
 								onClick={() => setQty((q) => Math.max(1, q - 1))}
 								sx={{
-									border: `1px solid #e0e0e0`,
+									border: "1px solid #e0e0e0",
 									borderRadius: "2px",
 									width: 36,
 									height: 36,
@@ -190,7 +180,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							<IconButton
 								onClick={() => setQty((q) => Math.min(10, q + 1))}
 								sx={{
-									border: `1px solid #e0e0e0`,
+									border: "1px solid #e0e0e0",
 									borderRadius: "2px",
 									width: 36,
 									height: 36,
@@ -221,7 +211,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 						</Button>
 						<IconButton
 							sx={{
-								border: `1px solid #e0e0e0`,
+								border: "1px solid #e0e0e0",
 								borderRadius: "2px",
 								px: 2,
 								"&:hover": { borderColor: GOLD, color: GOLD },
@@ -232,14 +222,19 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 					</Stack>
 
 					{/* Share */}
-					<Stack flexDirection="row" alignItems="center" gap={2}>
+					<Stack
+						flexDirection="row"
+						alignItems="center"
+						gap={2}
+						flexWrap="wrap"
+					>
 						<Typography variant="body2" color="text.secondary">
 							Share:
 						</Typography>
 						{[FacebookIcon, PinterestIcon, InstagramIcon, TwitterIcon].map(
-							(Icon) => (
+							(Icon, i) => (
 								<IconButton
-									key={Math.random()}
+									key={i}
 									size="small"
 									sx={{ color: "#555", "&:hover": { color: GOLD } }}
 								>
@@ -251,7 +246,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 
 					<Divider />
 
-					{/* Delivery */}
+					{/* Delivery badges */}
 					<Stack gap={1.5}>
 						{[
 							{

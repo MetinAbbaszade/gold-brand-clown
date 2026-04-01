@@ -40,10 +40,9 @@ const Stars = ({ count }: { count: number }) => (
 	<Stack flexDirection="row" color={GOLD}>
 		{[...Array(5)].map((_, i) => {
 			if (i < Math.floor(count))
-				return <StarIcon key={Math.random()} sx={{ fontSize: 18 }} />;
-			if (i < count)
-				return <StarHalfIcon key={Math.random()} sx={{ fontSize: 18 }} />;
-			return <StarBorderIcon key={Math.random()} sx={{ fontSize: 18 }} />;
+				return <StarIcon key={i} sx={{ fontSize: 18 }} />;
+			if (i < count) return <StarHalfIcon key={i} sx={{ fontSize: 18 }} />;
+			return <StarBorderIcon key={i} sx={{ fontSize: 18 }} />;
 		})}
 	</Stack>
 );
@@ -56,14 +55,19 @@ const ProductTabs = ({ product }: { product: Product }) => {
 			<Tabs
 				value={tab}
 				onChange={(_, v) => setTab(v)}
+				variant="scrollable"
+				scrollButtons="auto"
+				allowScrollButtonsMobile
 				sx={{
-					borderBottom: `1px solid #e0e0e0`,
+					borderBottom: "1px solid #e0e0e0",
 					"& .MuiTab-root": {
 						textTransform: "uppercase",
 						fontSize: "12px",
 						letterSpacing: "0.1em",
 						fontWeight: 500,
 						color: "#888",
+						minWidth: { xs: "auto", sm: "90px" },
+						px: { xs: 1.5, sm: 2 },
 					},
 					"& .Mui-selected": { color: `${GOLD_DARK} !important` },
 					"& .MuiTabs-indicator": { backgroundColor: GOLD },
@@ -95,25 +99,24 @@ const ProductTabs = ({ product }: { product: Product }) => {
 							overflow: "hidden",
 						}}
 					>
-						{Object.entries(product.details).map(([key, value], i) => (
+						{Object.entries(product.details).map(([key, value], i, arr) => (
 							<Stack
 								key={key}
-								flexDirection="row"
 								sx={{
+									flexDirection: { xs: "column", sm: "row" },
 									borderBottom:
-										i < Object.entries(product.details).length - 1
-											? "1px solid #e0e0e0"
-											: "none",
+										i < arr.length - 1 ? "1px solid #e0e0e0" : "none",
 									"&:hover": { bgcolor: "#fafafa" },
 								}}
 							>
 								<Box
 									sx={{
-										width: "200px",
+										width: { xs: "100%", sm: "200px" },
 										px: 3,
 										py: 1.5,
 										bgcolor: "#f9f6ee",
-										borderRight: "1px solid #e0e0e0",
+										borderRight: { xs: "none", sm: "1px solid #e0e0e0" },
+										borderBottom: { xs: "1px solid #e0e0e0", sm: "none" },
 									}}
 								>
 									<Typography
@@ -126,7 +129,7 @@ const ProductTabs = ({ product }: { product: Product }) => {
 								</Box>
 								<Box sx={{ px: 3, py: 1.5 }}>
 									<Typography fontSize="13px" color="text.secondary">
-										{value}
+										{value as string}
 									</Typography>
 								</Box>
 							</Stack>
@@ -139,12 +142,13 @@ const ProductTabs = ({ product }: { product: Product }) => {
 			{tab === 2 && (
 				<Box py={4}>
 					<Stack
-						flexDirection="row"
-						justifyContent="space-between"
-						alignItems="center"
-						mb={4}
-						p={3}
 						sx={{
+							flexDirection: { xs: "column", sm: "row" },
+							justifyContent: "space-between",
+							alignItems: { xs: "flex-start", sm: "center" },
+							gap: { xs: 2, sm: 0 },
+							mb: 4,
+							p: 3,
 							bgcolor: "#fafafa",
 							border: "1px solid #e0e0e0",
 							borderRadius: "4px",
@@ -177,17 +181,20 @@ const ProductTabs = ({ product }: { product: Product }) => {
 					</Stack>
 
 					<Stack gap={3}>
-						{reviews.map((r, _i) => (
+						{reviews.map((r, i) => (
 							<Box
-								key={Math.random()}
+								key={i}
 								p={3}
 								sx={{ border: "1px solid #e0e0e0", borderRadius: "4px" }}
 							>
 								<Stack
-									flexDirection="row"
-									justifyContent="space-between"
-									alignItems="flex-start"
-									mb={1.5}
+									sx={{
+										flexDirection: { xs: "column", sm: "row" },
+										justifyContent: "space-between",
+										alignItems: { xs: "flex-start", sm: "flex-start" },
+										gap: { xs: 1, sm: 0 },
+										mb: 1.5,
+									}}
 								>
 									<Stack gap={0.5}>
 										<Typography fontWeight={500}>{r.name}</Typography>
@@ -259,9 +266,7 @@ const ProductTabs = ({ product }: { product: Product }) => {
 								))}
 							</Stack>
 						</Box>
-
 						<Divider />
-
 						<Box>
 							<Typography variant="h6" fontWeight={400} mb={1.5}>
 								Return Policy
@@ -277,9 +282,7 @@ const ProductTabs = ({ product }: { product: Product }) => {
 								original packaging.
 							</Typography>
 						</Box>
-
 						<Divider />
-
 						<Box>
 							<Typography variant="h6" fontWeight={400} mb={1.5}>
 								Warranty

@@ -1,13 +1,11 @@
-import fetchDelay from "../delay"
+import { collections } from "@/store/collections";
+import fetchDelay from "../delay";
 
 export async function getAllCollections() {
-    await fetchDelay()
-    const data = await fetch('http://localhost:4000/collections')
+	await fetchDelay();
 
-    if (!data) {
-        return null
-    }
-
-    const jsonFormat = await data.json()
-    return jsonFormat
+	if (!collections) {
+		return null;
+	}
+	return collections;
 }

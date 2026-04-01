@@ -1,4 +1,5 @@
 import type { LoginFormValues } from "@/components/_common/SignUpComponent";
+import { users } from "@/store/users";
 import fetchDelay from "../delay";
 
 export interface OrderItem {
@@ -25,8 +26,8 @@ export interface User {
 	username: string;
 	password: string;
 	address: string;
-	order: OrderItem[];
-	wishlist: WishlistItem[];
+	order?: OrderItem[];
+	wishlist?: WishlistItem[];
 }
 
 interface LoginCredentials {
@@ -45,13 +46,11 @@ export interface ErrorResponse {
 }
 
 export type FetchUserResponse = SuccessResponse | ErrorResponse;
-const URL = "http://localhost:4000";
+const _URL = "http://localhost:4000";
 
-const fetchAllUser = async () => {
+const _fetchAllUser = async () => {
 	try {
 		await fetchDelay();
-		const res = await fetch(`${URL}/users`);
-		const users: User[] = await res.json();
 		if (!users) {
 			return {
 				msg: "User not found or incorrect password",
@@ -76,11 +75,6 @@ const fetchUserByEmail = async ({
 	password,
 }: LoginCredentials): Promise<FetchUserResponse> => {
 	try {
-		console.log(username);
-		console.log(password);
-		const res = await fetch(`${URL}/users`);
-		const users: User[] = await res.json();
-		console.log(users);
 		const user = users.find((user) => {
 			return (
 				user.username.toLowerCase() === username.toLowerCase() &&
@@ -110,8 +104,6 @@ const fetchUserByEmail = async ({
 export const fetchUserById = async (id: number | string) => {
 	try {
 		await fetchDelay();
-		const res = await fetch(`${URL}/users`);
-		const users: User[] = await res.json();
 
 		const user = users.find((user) => {
 			return user.id === id;
@@ -139,25 +131,13 @@ export const postUser = async (
 ): Promise<FetchUserResponse> => {
 	try {
 		await fetchDelay();
-		const users = await fetchAllUser();
-		const length = users.data?.length ?? 0;
+		const length = users.length ?? 0;
 
 		const dataToSend = { id: length + 1, ...data };
 
-		const res = await fetch(`${URL}/users`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify(dataToSend),
-		});
-
-		if (!res.ok) {
-			throw new Error("Failed to create user");
-		}
-		const createdUser: User = await res.json();
+		users.push(dataToSend);
 		return {
-			data: createdUser,
+			data: dataToSend,
 			status_code: 201,
 		};
 	} catch (_error) {
