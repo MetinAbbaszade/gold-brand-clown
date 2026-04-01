@@ -356,7 +356,7 @@ const ProductPageComponent = ({
 											},
 										}}
 									>
-										<Link href="/">View Details</Link>
+										<Link href={`/products/${data.id}`}>View Details</Link>
 									</Button>
 								</Stack>
 							</Box>
