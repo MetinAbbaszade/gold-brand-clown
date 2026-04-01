@@ -1,10 +1,10 @@
 export default async function fetchDelay() {
-    // Simulate a network delay
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Delay for 2 seconds
+	// Simulate a network delay
+	await new Promise((resolve) => setTimeout(resolve, 1000)); // Delay for 2 seconds
 
-    // --- Your actual data fetching logic would go here ---
-    // const res = await fetch('your-api-endpoint');
-    // const data = await res.json();
-    // return data;
-    return { message: 'Data loaded!' }; // Example data
+	// --- Your actual data fetching logic would go here ---
+	// const res = await fetch('your-api-endpoint');
+	// const data = await res.json();
+	// return data;
+	return { message: "Data loaded!" }; // Example data
 }

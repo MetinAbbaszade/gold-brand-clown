@@ -1,17 +1,17 @@
-import { heroContainerVariants, MotionStack } from "@/components/_common/HeroSection";
+import {
+	heroContainerVariants,
+	MotionStack,
+} from "@/components/_common/HeroSection";
 import CollectionsPage from "@/components/allPages/CollectionsPage";
 import { playfair } from "@/components/allPages/MainPageCom/page";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Collections'
-}
-
+	title: "Collections",
+};
 
 const page = () => {
-  return (
-      <CollectionsPage />
-  )
-}
+	return <CollectionsPage />;
+};
 
-export default page
+export default page;
