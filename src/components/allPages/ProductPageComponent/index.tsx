@@ -2,7 +2,6 @@
 import SearchIcon from "@mui/icons-material/Search";
 import {
 	Box,
-	Button,
 	FormControl,
 	InputLabel,
 	MenuItem,
@@ -13,15 +12,14 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import CollectionFooter from "@/components/_common/CollectionFooter";
 import {
 	heroContainerVariants,
 	MotionStack,
 } from "@/components/_common/HeroSection";
-import { montserrat, raleway } from "@/providers/ThemeRegistry";
+import ProductCard from "@/components/_common/ProductCard/ProductCard";
+import { raleway } from "@/providers/ThemeRegistry";
 import { playfair } from "../MainPageCom/page";
 
 const COLLECTION_OPTIONS: CollectionOption[] = [
@@ -272,94 +270,9 @@ const ProductPageComponent = ({
 				<Stack m="2rem 0" direction={"row"} flexWrap="wrap" gap={"2rem"}>
 					{productDatas.map((data) => {
 						return (
-							<Box
-								key={data.id}
-								width="250px"
-								sx={{
-									boxShadow: "0 5px 15px rgba(0, 0, 0, 0.05)",
-									transition: "all 0.3s ease",
-									background: "#fff",
-									"&:hover": {
-										transform: "translateY(-5px)",
-										boxShadow: "0 5px 15px rgba(0, 0, 0, 0.1)",
-									},
-									"&:hover >.MuiStack-root.css-nen11g-MuiStack-root>.MuiBox-root.css-h6ptix>img":
-										{
-											transform: "scale(1.05)",
-										},
-									overflow: "hidden",
-								}}
-								borderRadius={"5px"}
-							>
-								<Stack>
-									<Box
-										sx={{
-											position: "relative",
-											width: "100%",
-											height: "250px",
-										}}
-									>
-										<Image
-											src={data.images[0]}
-											alt={data.name}
-											fill
-											style={{
-												objectFit: "cover",
-												transition: "transform 0.5s ease",
-											}}
-										/>
-										<Typography
-											position="absolute"
-											top="10px"
-											p={"5px 10px"}
-											bgcolor="#d4b038"
-											color="#ffffff"
-											fontSize={"14px"}
-											fontFamily={montserrat.style.fontFamily}
-										>
-											{data.collection}
-										</Typography>
-									</Box>
-								</Stack>
-								<Stack p="20px">
-									<Typography
-										variant="body1"
-										sx={{ fontSize: "16px", mb: "8px" }}
-									>
-										{data.name}
-									</Typography>
-									<Typography
-										variant="body1"
-										sx={{
-											fontWeight: "500",
-											color: "#996515",
-											marginBottom: "15px",
-										}}
-									>
-										${data.price}
-									</Typography>
-									<Button
-										sx={{
-											display: "inline-block",
-											backgroundColor: "transparent",
-											border: "1px solid #B8860B",
-											color: "#B8860B",
-											padding: "8px 15px",
-											textDecoration: "none",
-											fontSize: "12px",
-											textTransform: "uppercase",
-											letterSpacing: "1px",
-											transition: "all 0.3s ease",
-											"&:hover": {
-												backgroundColor: "#D4AF37",
-												color: "#ffffff",
-											},
-										}}
-									>
-										<Link href={`/products/${data.id}`}>View Details</Link>
-									</Button>
-								</Stack>
-							</Box>
+							<Stack key={Math.random()}>
+								<ProductCard product={data} />
+							</Stack>
 						);
 					})}
 				</Stack>
