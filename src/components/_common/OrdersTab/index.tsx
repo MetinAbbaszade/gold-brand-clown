@@ -4,6 +4,7 @@ import { Button, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { playfair_display, raleway } from "@/providers/ThemeRegistry";
+import Image from "next/image";
 
 const OrdersTab = () => {
 	const { auth } = useContext(AuthContext);
@@ -74,12 +75,12 @@ const OrdersTab = () => {
 								}}
 							>
 								<Stack flexDirection="row" columnGap={3} alignItems="center">
-									<img
+									<Image
 										src={data.img}
 										alt="Order item"
+										width={80}
+										height={80}
 										style={{
-											width: "80px",
-											height: "80px",
 											objectFit: "cover",
 											borderRadius: "4px",
 											border: "1px solid #e0e0e0",

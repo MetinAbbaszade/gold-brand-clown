@@ -46,29 +46,6 @@ export interface ErrorResponse {
 }
 
 export type FetchUserResponse = SuccessResponse | ErrorResponse;
-const _URL = "http://localhost:4000";
-
-const _fetchAllUser = async () => {
-	try {
-		await fetchDelay();
-		if (!users) {
-			return {
-				msg: "User not found or incorrect password",
-				status_code: 404,
-			};
-		}
-
-		return {
-			data: users,
-			status_code: 200,
-		};
-	} catch (error) {
-		return {
-			msg: `Fetch error: ${(error as Error).message}`,
-			status_code: 500,
-		};
-	}
-};
 
 const fetchUserByEmail = async ({
 	username,
@@ -140,7 +117,8 @@ export const postUser = async (
 			data: dataToSend,
 			status_code: 201,
 		};
-	} catch (_error) {
+	} catch (e) {
+		console.log(e);
 		return {
 			msg: "Unexpected Error",
 			status_code: 500,

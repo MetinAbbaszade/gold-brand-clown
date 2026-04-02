@@ -21,9 +21,10 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import { useState } from "react";
+import type { Product } from "../ProductPageComponent";
 
 export interface ProductDetailPageProps {
-	product: any;
+	product: Product | undefined;
 }
 
 const GOLD = "#D4AF37";
@@ -50,8 +51,8 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 						}}
 					>
 						<Image
-							src={product.images[activeImg]}
-							alt={product.name}
+							src={product?.images[activeImg] ?? ""}
+							alt={product?.name ?? ""}
 							fill
 							style={{ objectFit: "cover" }}
 							sizes="(max-width: 900px) 100vw, 50vw"
@@ -60,9 +61,9 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 
 					{/* Thumbnails */}
 					<Stack flexDirection="row" gap={1.5} flexWrap="wrap">
-						{product.images.map((img: string, i: number) => (
+						{product?.images.map((img: string, i: number) => (
 							<Box
-								key={i}
+								key={Math.random()}
 								onClick={() => setActiveImg(i)}
 								sx={{
 									position: "relative",
@@ -109,7 +110,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							textTransform="uppercase"
 							color={GOLD_DARK}
 						>
-							{product.collection} Collection
+							{product?.collection} Collection
 						</Typography>
 					</Box>
 
@@ -118,14 +119,14 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 						fontWeight={300}
 						sx={{ fontSize: { xs: "1.5rem", md: "2.125rem" } }}
 					>
-						{product.name}
+						{product?.name}
 					</Typography>
 
 					{/* Rating */}
 					<Stack flexDirection="row" alignItems="center" gap={1}>
 						<Stack flexDirection="row" color={GOLD}>
-							{[...Array(4)].map((_, i) => (
-								<StarIcon key={i} sx={{ fontSize: 20 }} />
+							{[...Array(4)].map((_, _i) => (
+								<StarIcon key={Math.random()} sx={{ fontSize: 20 }} />
 							))}
 							<StarHalfIcon sx={{ fontSize: 20 }} />
 						</Stack>
@@ -136,7 +137,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 
 					{/* Price */}
 					<Typography fontSize="2rem" fontWeight={400} color="#1a1a1a">
-						${product.price.toLocaleString()}
+						${product?.price.toLocaleString()}
 					</Typography>
 
 					{/* Stock */}
@@ -232,9 +233,9 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							Share:
 						</Typography>
 						{[FacebookIcon, PinterestIcon, InstagramIcon, TwitterIcon].map(
-							(Icon, i) => (
+							(Icon, _i) => (
 								<IconButton
-									key={i}
+									key={Math.random()}
 									size="small"
 									sx={{ color: "#555", "&:hover": { color: GOLD } }}
 								>

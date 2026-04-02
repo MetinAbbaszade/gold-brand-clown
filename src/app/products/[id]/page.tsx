@@ -9,12 +9,13 @@ import {
 import ProductCard from "@/components/_common/ProductCard/ProductCard";
 import ProductTabs from "@/components/_common/ProductTabs/ProductTabs";
 import ProductDetailPage from "@/components/allPages/ProductDetailPage";
+import type { Product } from "@/components/allPages/ProductPageComponent";
 
 export const metadata: Metadata = { title: "Product Details" };
 
 const page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	const { id } = await params;
-	const product: any = await getProductById(Number(id));
+	const product: Product | undefined = await getProductById(Number(id));
 
 	return (
 		<MotionStack
@@ -33,7 +34,7 @@ const page = async ({ params }: { params: Promise<{ id: number }> }) => {
 				<Typography
 					sx={{ padding: "20px 0", fontSize: "16px", color: "#888888" }}
 				>
-					Home / Products / {product.name}
+					Home / Products / {product?.name}
 				</Typography>
 				<Stack sx={{ m: { xs: "10px 0", md: "20px 0 30px" } }}>
 					<ProductDetailPage product={product} />
@@ -61,7 +62,7 @@ const page = async ({ params }: { params: Promise<{ id: number }> }) => {
 						mx: "auto",
 					}}
 				>
-					{product.relatedProducts.map(async (relatedId: number) => {
+					{product?.relatedProducts.map(async (relatedId: number) => {
 						const relatedProduct = await getProductById(relatedId);
 						return (
 							<Grid key={relatedId} size={{ xs: 12, sm: 6, md: 4 }}>
@@ -89,7 +90,7 @@ const page = async ({ params }: { params: Promise<{ id: number }> }) => {
 						mx: "auto",
 					}}
 				>
-					{product.recentlyViewed.map(async (viewedId: number) => {
+					{product?.recentlyViewed.map(async (viewedId: number) => {
 						const viewedProduct = await getProductById(viewedId);
 						return (
 							<Grid key={viewedId} size={{ xs: 12, sm: 6, md: 4 }}>

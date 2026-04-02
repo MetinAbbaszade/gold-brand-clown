@@ -8,7 +8,12 @@ import { containerFramer } from "../MainAboutSection";
 
 interface IProp {
 	playfair: NextFont;
-	testimonialsData: any;
+	testimonialsData: {
+		name: string;
+		location: string;
+		rating: number;
+		comment: string;
+	}[];
 }
 
 const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
@@ -16,7 +21,10 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 
 	useEffect(() => {
 		const timer = setInterval(() => {
-			setIndex((i) => (i += 1) % testimonialsData.length);
+			setIndex((i) => {
+				i = i + 1;
+				return i % testimonialsData.length;
+			});
 		}, 2000);
 
 		return () => clearInterval(timer);

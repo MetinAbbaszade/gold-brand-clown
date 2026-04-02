@@ -40,14 +40,15 @@ const Stars = ({ count }: { count: number }) => (
 	<Stack flexDirection="row" color={GOLD}>
 		{[...Array(5)].map((_, i) => {
 			if (i < Math.floor(count))
-				return <StarIcon key={i} sx={{ fontSize: 18 }} />;
-			if (i < count) return <StarHalfIcon key={i} sx={{ fontSize: 18 }} />;
-			return <StarBorderIcon key={i} sx={{ fontSize: 18 }} />;
+				return <StarIcon key={Math.random()} sx={{ fontSize: 18 }} />;
+			if (i < count)
+				return <StarHalfIcon key={Math.random()} sx={{ fontSize: 18 }} />;
+			return <StarBorderIcon key={Math.random()} sx={{ fontSize: 18 }} />;
 		})}
 	</Stack>
 );
 
-const ProductTabs = ({ product }: { product: Product }) => {
+const ProductTabs = ({ product }: { product: Product | undefined }) => {
 	const [tab, setTab] = useState(0);
 
 	return (
@@ -83,7 +84,7 @@ const ProductTabs = ({ product }: { product: Product }) => {
 			{tab === 0 && (
 				<Box py={4}>
 					<Typography variant="body1" lineHeight={1.9} color="text.secondary">
-						{product.description}
+						{product?.description}
 					</Typography>
 				</Box>
 			)}
@@ -99,41 +100,42 @@ const ProductTabs = ({ product }: { product: Product }) => {
 							overflow: "hidden",
 						}}
 					>
-						{Object.entries(product.details).map(([key, value], i, arr) => (
-							<Stack
-								key={key}
-								sx={{
-									flexDirection: { xs: "column", sm: "row" },
-									borderBottom:
-										i < arr.length - 1 ? "1px solid #e0e0e0" : "none",
-									"&:hover": { bgcolor: "#fafafa" },
-								}}
-							>
-								<Box
+						{product &&
+							Object.entries(product.details).map(([key, value], i, arr) => (
+								<Stack
+									key={key}
 									sx={{
-										width: { xs: "100%", sm: "200px" },
-										px: 3,
-										py: 1.5,
-										bgcolor: "#f9f6ee",
-										borderRight: { xs: "none", sm: "1px solid #e0e0e0" },
-										borderBottom: { xs: "1px solid #e0e0e0", sm: "none" },
+										flexDirection: { xs: "column", sm: "row" },
+										borderBottom:
+											i < arr.length - 1 ? "1px solid #e0e0e0" : "none",
+										"&:hover": { bgcolor: "#fafafa" },
 									}}
 								>
-									<Typography
-										fontSize="13px"
-										fontWeight={500}
-										textTransform="capitalize"
+									<Box
+										sx={{
+											width: { xs: "100%", sm: "200px" },
+											px: 3,
+											py: 1.5,
+											bgcolor: "#f9f6ee",
+											borderRight: { xs: "none", sm: "1px solid #e0e0e0" },
+											borderBottom: { xs: "1px solid #e0e0e0", sm: "none" },
+										}}
 									>
-										{key.replace(/([A-Z])/g, " $1")}
-									</Typography>
-								</Box>
-								<Box sx={{ px: 3, py: 1.5 }}>
-									<Typography fontSize="13px" color="text.secondary">
-										{value as string}
-									</Typography>
-								</Box>
-							</Stack>
-						))}
+										<Typography
+											fontSize="13px"
+											fontWeight={500}
+											textTransform="capitalize"
+										>
+											{key.replace(/([A-Z])/g, " $1")}
+										</Typography>
+									</Box>
+									<Box sx={{ px: 3, py: 1.5 }}>
+										<Typography fontSize="13px" color="text.secondary">
+											{value as string}
+										</Typography>
+									</Box>
+								</Stack>
+							))}
 					</Stack>
 				</Box>
 			)}
@@ -181,9 +183,9 @@ const ProductTabs = ({ product }: { product: Product }) => {
 					</Stack>
 
 					<Stack gap={3}>
-						{reviews.map((r, i) => (
+						{reviews.map((r) => (
 							<Box
-								key={i}
+								key={Math.random()}
 								p={3}
 								sx={{ border: "1px solid #e0e0e0", borderRadius: "4px" }}
 							>
