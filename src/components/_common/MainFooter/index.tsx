@@ -62,14 +62,15 @@ const MainFooter: React.FC<IProp> = ({ playfair }) => {
 				>
 					{Object.entries(datas).map(([key, value]) => (
 						<Stack key={key} spacing={1}>
-							<Typography
-								component={Link}
-								variant="h6"
-								fontFamily={playfair?.style.fontFamily}
-								href={`/${key.toLowerCase()}`}
-							>
-								{key}
-							</Typography>
+							<Link href={`/${key.toLowerCase()}`}>
+								<Typography
+									variant="h6"
+									fontFamily={playfair?.style.fontFamily}
+								>
+									{key}
+								</Typography>
+							</Link>
+
 							<Divider sx={{ width: "25px", bgcolor: "gold" }} />
 							<Stack>
 								{value.map((v) => (

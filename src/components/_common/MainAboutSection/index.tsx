@@ -45,27 +45,29 @@ const MainAboutSection: React.FC<IProp> = ({ playfair }) => {
 					Our commitment to excellence ensures that every creation becomes a
 					treasured heirloom, passed down through generations.
 				</Typography>
-				<Stack
-					component={Link}
-					href="/products"
-					direction="row"
-					sx={{
-						"&:hover": {
-							"& .learn-more-arrow": { transform: "translateX(7px)" },
-						},
-					}}
-					spacing={0.3}
-				>
-					<Typography color="#d4af38">Learn more about our heritage</Typography>
-					<ArrowRightAltIcon
-						className="learn-more-arrow"
+				<Link href="/products">
+					<Stack
+						direction="row"
 						sx={{
-							color: "#d4af38",
-							fontWeight: "600",
-							transition: "transform 0.5s ease-in",
+							"&:hover": {
+								"& .learn-more-arrow": { transform: "translateX(7px)" },
+							},
 						}}
-					/>
-				</Stack>
+						spacing={0.3}
+					>
+						<Typography color="#d4af38">
+							Learn more about our heritage
+						</Typography>
+						<ArrowRightAltIcon
+							className="learn-more-arrow"
+							sx={{
+								color: "#d4af38",
+								fontWeight: "600",
+								transition: "transform 0.5s ease-in",
+							}}
+						/>
+					</Stack>
+				</Link>
 			</Stack>
 
 			<Stack

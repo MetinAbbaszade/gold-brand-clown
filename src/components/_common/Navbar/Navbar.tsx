@@ -115,13 +115,11 @@ const Navbar = () => {
 						sx={{ display: { xs: "none", md: "flex" } }}
 					>
 						{auth.token && (
-							<IconButton
-								component={Link}
-								href={auth.userData ? "/profile" : "/auth"}
-								color="inherit"
-							>
-								<PersonOutlineIcon />
-							</IconButton>
+							<Link href={auth.userData ? "/profile" : "/auth"}>
+								<IconButton color="inherit">
+									<PersonOutlineIcon />
+								</IconButton>
+							</Link>
 						)}
 						{auth.userData ? (
 							<Button
@@ -149,13 +147,11 @@ const Navbar = () => {
 						sx={{ display: { xs: "flex", md: "none" } }}
 					>
 						{auth.token && (
-							<IconButton
-								component={Link}
-								href={auth.userData ? "/profile" : "/auth"}
-								color="inherit"
-							>
-								<PersonOutlineIcon />
-							</IconButton>
+							<Link href={auth.userData ? "/profile" : "/auth"}>
+								<IconButton color="inherit">
+									<PersonOutlineIcon />
+								</IconButton>
+							</Link>
 						)}
 						<IconButton color="inherit" onClick={toggleDrawer} edge="end">
 							{drawerOpen ? <CloseIcon /> : <MenuIcon />}
@@ -182,27 +178,26 @@ const Navbar = () => {
 					{navItems.map((item) => {
 						const isActive = pathname === item.href;
 						return (
-							<ListItem
-								key={item.text}
-								component={Link}
-								href={item.href}
-								onClick={toggleDrawer}
-								sx={{
-									borderLeft: isActive
-										? "3px solid #d4af36"
-										: "3px solid transparent",
-									color: isActive ? "#d4af36" : "text.primary",
-								}}
-							>
-								<ListItemText
-									primary={item.text}
-									primaryTypographyProps={{
-										textTransform: "uppercase",
-										letterSpacing: "1px",
-										fontSize: "0.9rem",
+							<Link href={item.href} key={item.text}>
+								<ListItem
+									onClick={toggleDrawer}
+									sx={{
+										borderLeft: isActive
+											? "3px solid #d4af36"
+											: "3px solid transparent",
+										color: isActive ? "#d4af36" : "text.primary",
 									}}
-								/>
-							</ListItem>
+								>
+									<ListItemText
+										primary={item.text}
+										primaryTypographyProps={{
+											textTransform: "uppercase",
+											letterSpacing: "1px",
+											fontSize: "0.9rem",
+										}}
+									/>
+								</ListItem>
+							</Link>
 						);
 					})}
 

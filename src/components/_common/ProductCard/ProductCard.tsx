@@ -32,8 +32,8 @@ const ProductCard = ({ product }: ProductDetailPageProps) => {
 				}}
 			>
 				<Image
-					src={product?.images[0] ?? ''}
-					alt={product?.name ?? ''}
+					src={product?.images[0] ?? ""}
+					alt={product?.name ?? ""}
 					fill
 					style={{
 						objectFit: "cover",
@@ -64,27 +64,27 @@ const ProductCard = ({ product }: ProductDetailPageProps) => {
 				>
 					${product?.price}
 				</Typography>
-				<Button
-					component={Link}
-					href={`/products/${product?.id}`}
-					sx={{
-						display: "inline-block",
-						backgroundColor: "transparent",
-						border: "1px solid #B8860B",
-						color: "#B8860B",
-						padding: "8px 15px",
-						fontSize: "12px",
-						textTransform: "uppercase",
-						letterSpacing: "1px",
-						transition: "all 0.3s ease",
-						"&:hover": {
-							backgroundColor: "#D4AF37",
-							color: "#ffffff",
-						},
-					}}
-				>
-					View Details
-				</Button>
+				<Link href={`/products/${product?.id}`}>
+					<Button
+						sx={{
+							display: "inline-block",
+							backgroundColor: "transparent",
+							border: "1px solid #B8860B",
+							color: "#B8860B",
+							padding: "8px 15px",
+							fontSize: "12px",
+							textTransform: "uppercase",
+							letterSpacing: "1px",
+							transition: "all 0.3s ease",
+							"&:hover": {
+								backgroundColor: "#D4AF37",
+								color: "#ffffff",
+							},
+						}}
+					>
+						View Details
+					</Button>
+				</Link>
 			</Stack>
 		</Box>
 	);

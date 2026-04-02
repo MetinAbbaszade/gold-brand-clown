@@ -181,22 +181,25 @@ const MainCollectionSection: React.FC<IComp> = ({
 						zIndex={100}
 						mb={{ xs: 0, md: 2 }}
 					>
-						<Stack
-							component={Button}
-							onClick={() =>
-								setIndex(
-									(i) =>
-										(i - 1 + collectionData.length) % collectionData.length,
-								)
-							}
-							sx={{ bgcolor: "rgba(255,255,255,0.2)", minWidth: "unset" }}
-							borderRadius="50%"
-							width="50px"
-							height="50px"
-							border="1px solid rgba(255,255,255,0.3)"
-						>
-							<KeyboardArrowLeftIcon sx={{ color: "#fff", fontSize: "30px" }} />
-						</Stack>
+						<Button>
+							<Stack
+								onClick={() =>
+									setIndex(
+										(i) =>
+											(i - 1 + collectionData.length) % collectionData.length,
+									)
+								}
+								sx={{ bgcolor: "rgba(255,255,255,0.2)", minWidth: "unset" }}
+								borderRadius="50%"
+								width="50px"
+								height="50px"
+								border="1px solid rgba(255,255,255,0.3)"
+							>
+								<KeyboardArrowLeftIcon
+									sx={{ color: "#fff", fontSize: "30px" }}
+								/>
+							</Stack>
+						</Button>
 						<Stack direction="row" spacing={1}>
 							{[...Array(collectionData.length).keys()].map((i) => (
 								<Stack
@@ -209,17 +212,18 @@ const MainCollectionSection: React.FC<IComp> = ({
 								/>
 							))}
 						</Stack>
-						<Stack
-							component={Button}
-							onClick={() => setIndex((i) => (i + 1) % collectionData.length)}
-							sx={{ bgcolor: "rgba(255,255,255,0.2)", minWidth: "unset" }}
-							borderRadius="50%"
-							width="50px"
-							height="50px"
-							border="1px solid rgba(255,255,255,0.3)"
-						>
-							<ChevronRightIcon sx={{ color: "#fff", fontSize: "30px" }} />
-						</Stack>
+						<Button>
+							<Stack
+								onClick={() => setIndex((i) => (i + 1) % collectionData.length)}
+								sx={{ bgcolor: "rgba(255,255,255,0.2)", minWidth: "unset" }}
+								borderRadius="50%"
+								width="50px"
+								height="50px"
+								border="1px solid rgba(255,255,255,0.3)"
+							>
+								<ChevronRightIcon sx={{ color: "#fff", fontSize: "30px" }} />
+							</Stack>
+						</Button>
 					</Stack>
 				</Stack>
 			</MotionStack>
