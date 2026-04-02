@@ -125,7 +125,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 					{/* Rating */}
 					<Stack flexDirection="row" alignItems="center" gap={1}>
 						<Stack flexDirection="row" color={GOLD}>
-							{[...Array(4)].map((_, _i) => (
+							{[...Array(4)].map(() => (
 								<StarIcon key={Math.random()} sx={{ fontSize: 20 }} />
 							))}
 							<StarHalfIcon sx={{ fontSize: 20 }} />
@@ -233,7 +233,7 @@ const ProductDetailPage = ({ product }: ProductDetailPageProps) => {
 							Share:
 						</Typography>
 						{[FacebookIcon, PinterestIcon, InstagramIcon, TwitterIcon].map(
-							(Icon, _i) => (
+							(Icon) => (
 								<IconButton
 									key={Math.random()}
 									size="small"

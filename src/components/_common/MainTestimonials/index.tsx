@@ -58,7 +58,7 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 					fontSize={"24px"}
 					fontStyle={"italic"}
 				>
-					"{testimonialsData[index].comment}"
+					&quot;{testimonialsData[index].comment}&quot;
 				</Typography>
 				<Stack
 					direction={"row"}
