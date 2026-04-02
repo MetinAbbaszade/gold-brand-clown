@@ -32,8 +32,8 @@ const ProductCard = ({ product }: ProductDetailPageProps) => {
 				}}
 			>
 				<Image
-					src={product.images[0]}
-					alt={product.name}
+					src={product?.images[0] ?? ''}
+					alt={product?.name ?? ''}
 					fill
 					style={{
 						objectFit: "cover",
@@ -49,24 +49,24 @@ const ProductCard = ({ product }: ProductDetailPageProps) => {
 					color="#ffffff"
 					fontSize="14px"
 				>
-					{product.collection}
+					{product?.collection}
 				</Typography>
 			</Box>
 
 			{/* Info */}
 			<Stack p="20px">
 				<Typography variant="body1" sx={{ fontSize: "16px", mb: "8px" }}>
-					{product.name}
+					{product?.name}
 				</Typography>
 				<Typography
 					variant="body1"
 					sx={{ fontWeight: "500", color: "#996515", marginBottom: "15px" }}
 				>
-					${product.price}
+					${product?.price}
 				</Typography>
 				<Button
 					component={Link}
-					href={`/products/${product.id}`}
+					href={`/products/${product?.id}`}
 					sx={{
 						display: "inline-block",
 						backgroundColor: "transparent",
