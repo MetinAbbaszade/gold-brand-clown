@@ -81,20 +81,20 @@ interface ProductPageComponentProps {
 }
 
 export interface ProductDetails {
-	clarity: string;
-	color: string;
-	diamond: string;
-	height: string;
-	metal: string;
-	weight: string;
-	width: string;
+	clarity?: string;
+	color?: string;
+	diamond?: string;
+	height?: string;
+	metal?: string;
+	weight?: string;
+	width?: string;
 }
 
 export interface Product {
 	collection: string;
 	description: string;
 	details: ProductDetails;
-	id: string;
+	id: number;
 	images: string[];
 	name: string;
 	price: number;

@@ -4,6 +4,7 @@ import { Button, Grid, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 import { playfair_display } from "@/providers/ThemeRegistry";
+import Image from "next/image";
 
 const WishlistTab = () => {
 	const { auth } = useContext(AuthContext);
@@ -42,7 +43,7 @@ const WishlistTab = () => {
 									overflow: "hidden",
 								}}
 							>
-								<img
+								<Image
 									src={img}
 									alt={name}
 									style={{
