@@ -1,6 +1,6 @@
 export const collections = [
 	{
-		id: 1,
+		id: "1",
 		name: "Celestial",
 		description: "Inspired by the cosmos",
 		longDescription:
@@ -10,7 +10,7 @@ export const collections = [
 		link: "#celestial",
 	},
 	{
-		id: 2,
+		id: "2",
 		name: "Heritage",
 		description: "Timeless classics reimagined",
 		longDescription:
@@ -20,7 +20,7 @@ export const collections = [
 		link: "#heritage",
 	},
 	{
-		id: 3,
+		id: "3",
 		name: "Bespoke",
 		description: "Customized to perfection",
 		longDescription:
@@ -30,7 +30,7 @@ export const collections = [
 		link: "#bespoke",
 	},
 	{
-		id: 4,
+		id: "4",
 		name: "Ethereal",
 		description: "Delicate designs for the modern woman",
 		longDescription:
@@ -40,7 +40,7 @@ export const collections = [
 		link: "#ethereal",
 	},
 	{
-		id: 5,
+		id: "5",
 		name: "Royal",
 		description: "Statement pieces fit for royalty",
 		longDescription:
@@ -50,7 +50,7 @@ export const collections = [
 		link: "#royal",
 	},
 	{
-		id: 6,
+		id: "6",
 		name: "Minimalist",
 		description: "Understated elegance for everyday",
 		longDescription:
@@ -60,7 +60,7 @@ export const collections = [
 		link: "#minimalist",
 	},
 	{
-		id: 7,
+		id: "7",
 		name: "Art Deco",
 		description: "Bold and geometric designs",
 		longDescription:
@@ -70,7 +70,7 @@ export const collections = [
 		link: "#art-deco",
 	},
 	{
-		id: 8,
+		id: "8",
 		name: "Vintage",
 		description: "Nostalgic pieces with a story",
 		longDescription:
@@ -80,7 +80,7 @@ export const collections = [
 		link: "#vintage",
 	},
 	{
-		id: 9,
+		id: "9",
 		name: "Nature-Inspired",
 		description: "Jewelry that reflects the beauty of nature",
 		longDescription:

@@ -7,8 +7,9 @@ import type { NextFont } from "next/dist/compiled/@next/font";
 import type React from "react";
 import { useEffect, useState } from "react";
 import { MotionStack } from "../HeroSection";
+import type { MainCollection } from "@/store/mainCollections";
 
-interface ICollection {
+export interface ICollection {
 	name: string;
 	description: string;
 	prodName: string;
@@ -19,7 +20,7 @@ interface ICollection {
 
 export interface IComp {
 	playfair: NextFont;
-	collectionData: ICollection[];
+	collectionData: MainCollection[];
 }
 
 const slideInVariants = {

@@ -8,12 +8,14 @@ import { containerFramer } from "../MainAboutSection";
 
 interface IProp {
 	playfair: NextFont;
-	testimonialsData: {
-		name: string;
-		location: string;
-		rating: number;
-		comment: string;
-	}[];
+	testimonialsData:
+		| {
+				name: string;
+				location: string;
+				rating: number;
+				comment: string;
+		  }[]
+		| null;
 }
 
 const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
@@ -23,12 +25,12 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 		const timer = setInterval(() => {
 			setIndex((i) => {
 				i = i + 1;
-				return i % testimonialsData.length;
+				return i % (testimonialsData?.length ? testimonialsData.length : 1);
 			});
 		}, 2000);
 
 		return () => clearInterval(timer);
-	}, [testimonialsData.length]);
+	}, [testimonialsData?.length]);
 	return (
 		<MotionStack
 			variants={containerFramer}
@@ -58,7 +60,7 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 					fontSize={"24px"}
 					fontStyle={"italic"}
 				>
-					&quot;{testimonialsData[index].comment}&quot;
+					&quot;{testimonialsData ? testimonialsData[index].comment : ""}&quot;
 				</Typography>
 				<Stack
 					direction={"row"}
@@ -73,12 +75,12 @@ const MainTestimonials: React.FC<IProp> = ({ playfair, testimonialsData }) => {
 						}}
 					/>
 					<Typography color="#666" variant="body1">
-						{testimonialsData[index].name}
+						{testimonialsData ? testimonialsData[index].name : ""}
 					</Typography>
 				</Stack>
 			</Stack>
 			<Stack direction={"row"} spacing={2} justifyContent={"center"}>
-				{[...Array(testimonialsData.length).keys()].map((i) => (
+				{[...Array(testimonialsData?.length).keys()].map((i) => (
 					<Stack
 						key={i}
 						width={10}

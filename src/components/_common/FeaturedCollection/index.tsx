@@ -3,10 +3,7 @@ import type { IProp } from "../CollectionCard";
 import { stackVariant } from "../CollectionFooter";
 import { MotionStack } from "../HeroSection";
 
-const FeaturedCollection: React.FC<IProp> = ({
-	data: { name, longDescription, image },
-	playfair,
-}) => {
+const FeaturedCollection: React.FC<IProp> = ({ data, playfair }) => {
 	return (
 		<MotionStack
 			variants={stackVariant}
@@ -55,10 +52,10 @@ const FeaturedCollection: React.FC<IProp> = ({
 							color="#222222"
 							sx={{ fontSize: { xs: "1.5rem", md: "2.125rem" } }}
 						>
-							{name}
+							{data.name}
 						</Typography>
 						<Typography letterSpacing={1} lineHeight={1.5}>
-							{longDescription}
+							{data.longDescription}
 						</Typography>
 						<Button
 							href="/products"
@@ -80,7 +77,7 @@ const FeaturedCollection: React.FC<IProp> = ({
 						width="100%"
 						sx={{
 							height: { xs: "250px", sm: "320px", md: "100%" },
-							backgroundImage: `url("${image}")`,
+							backgroundImage: `url("${data.image}")`,
 							backgroundRepeat: "no-repeat",
 							backgroundSize: "cover",
 							backgroundPosition: "center",

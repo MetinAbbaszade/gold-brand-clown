@@ -1,4 +1,12 @@
-export const mainCollections = [
+export type MainCollection = {
+	name: string;
+	description: string;
+	prodName: string;
+	price: number;
+	imageUrl: string;
+};
+
+export const mainCollections: MainCollection[] = [
 	{
 		name: "Celestial",
 		description: "First Description",

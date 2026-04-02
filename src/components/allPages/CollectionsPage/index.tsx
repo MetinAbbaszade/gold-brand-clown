@@ -10,7 +10,7 @@ import {
 import { playfair } from "../MainPageCom/page";
 
 export interface IData {
-	id: number;
+	id: string;
 	name: string;
 	description: string;
 	longDescription: string;
@@ -19,7 +19,7 @@ export interface IData {
 }
 
 const CollectionsPage = async () => {
-	const datas: IData[] = await getAllCollections();
+	const datas: IData[] | null = await getAllCollections();
 	return (
 		<MotionStack
 			variants={heroContainerVariants}
@@ -68,7 +68,7 @@ const CollectionsPage = async () => {
 						columnSpacing={5}
 						sx={{ width: { xs: "100%", sm: "90%", md: "70%" } }}
 					>
-						{datas.map((data) => (
+						{datas?.map((data) => (
 							<Grid key={data.id} size={{ xs: 12, sm: 6, md: 4 }}>
 								<CollectionCard data={data} playfair={playfair} />
 							</Grid>
