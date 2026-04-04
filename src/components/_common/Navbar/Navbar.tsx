@@ -3,7 +3,9 @@
 import CloseIcon from "@mui/icons-material/Close";
 import MenuIcon from "@mui/icons-material/Menu";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import {
+	Badge,
 	Button,
 	Divider,
 	Drawer,
@@ -20,6 +22,8 @@ import { Playfair_Display } from "next/font/google";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import CartDialog from "@/components/_common/CartDialog";
+import { CartContext } from "@/context/CartContext";
 import { AuthContext } from "@/context/AuthContext";
 
 export const playfair = Playfair_Display({
@@ -42,7 +46,9 @@ const Navbar = () => {
 	const pathname = usePathname();
 	const router = useRouter();
 	const { auth, logOutFunction } = useContext(AuthContext);
+	const { itemCount } = useContext(CartContext);
 	const [drawerOpen, setDrawerOpen] = useState(false);
+	const [isCartOpen, setIsCartOpen] = useState(false);
 
 	const toggleDrawer = () => setDrawerOpen((prev) => !prev);
 
@@ -121,6 +127,11 @@ const Navbar = () => {
 								</IconButton>
 							</Link>
 						)}
+						<IconButton color="inherit" onClick={() => setIsCartOpen(true)}>
+							<Badge badgeContent={itemCount} color="warning">
+								<ShoppingBagOutlinedIcon />
+							</Badge>
+						</IconButton>
 						{auth.userData ? (
 							<Button
 								variant="contained"
@@ -153,6 +164,11 @@ const Navbar = () => {
 								</IconButton>
 							</Link>
 						)}
+						<IconButton color="inherit" onClick={() => setIsCartOpen(true)}>
+							<Badge badgeContent={itemCount} color="warning">
+								<ShoppingBagOutlinedIcon />
+							</Badge>
+						</IconButton>
 						<IconButton color="inherit" onClick={toggleDrawer} edge="end">
 							{drawerOpen ? <CloseIcon /> : <MenuIcon />}
 						</IconButton>
@@ -231,6 +247,7 @@ const Navbar = () => {
 					</ListItem>
 				</List>
 			</Drawer>
+			<CartDialog open={isCartOpen} onClose={() => setIsCartOpen(false)} />
 		</>
 	);
 };
