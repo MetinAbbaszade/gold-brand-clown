@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import Loading from "@/app/loading";
 import Navbar from "@/components/_common/Navbar/Navbar";
 import AuthContextProvider from "@/context/AuthContext";
+import CartContextProvider from "@/context/CartContext";
 import ThemeRegistry from "@/providers/ThemeRegistry";
 
 export default function LayoutWrapper({
@@ -19,18 +20,20 @@ export default function LayoutWrapper({
 		<Suspense fallback={<Loading />}>
 			<AuthContextProvider>
 				<ThemeRegistry>
-					{!isAuth && <Navbar />}
-					<Stack
-						component="main"
-						sx={{
-							paddingTop: !isAuth ? "80px" : 0,
-							minHeight: "100vh",
-							width: "100%",
-							flexGrow: 1,
-						}}
-					>
-						{children}
-					</Stack>
+					<CartContextProvider>
+						{!isAuth && <Navbar />}
+						<Stack
+							component="main"
+							sx={{
+								paddingTop: !isAuth ? "80px" : 0,
+								minHeight: "100vh",
+								width: "100%",
+								flexGrow: 1,
+							}}
+						>
+							{children}
+						</Stack>
+					</CartContextProvider>
 				</ThemeRegistry>
 			</AuthContextProvider>
 		</Suspense>
